@@ -33,6 +33,10 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
@@ -45,4 +49,15 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    // Retrofit for HTTP requests
+    implementation(libs.retrofit)
+    // Gson converter to serialize/deserialize JSON
+    implementation(libs.converter.gson)
+    // Kotlin Coroutines support (for asynchronous calls)
+    implementation(libs.kotlinx.coroutines.android)
+    // Optional: OkHttp logging interceptor for debugging network calls
+    implementation(libs.logging.interceptor)
+
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
 }
