@@ -19,7 +19,7 @@ class UserViewModel : ViewModel() {
     private val _error = MutableLiveData<String>()
     val error: LiveData<String> get() = _error
 
-    fun getUserByEmail(email: String, password: String){
+    fun getUserByEmail(email: String){
         viewModelScope.launch {
             userRepository.getUserByEmail(email)
                 .onSuccess { _userResponse.postValue(it) }
