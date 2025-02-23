@@ -53,9 +53,25 @@ class LoginActivity : AppCompatActivity() {
                 Toast.LENGTH_SHORT
             ).show()
 
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            finish()
+            val userType = loginResponse.clazz_
+
+            when(userType){
+                "CUSTOMER" -> {
+                    val intent = Intent(this, CustomerActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                }
+                "MANAGER" -> {
+                    val intent = Intent(this, ManagerActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                }
+                "DRIVER" -> {
+                    val intent = Intent(this, DriverActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                }
+            }
         }
 
         viewModel.error.observe(this) { errorMsg ->
