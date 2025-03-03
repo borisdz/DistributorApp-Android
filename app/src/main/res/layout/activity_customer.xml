@@ -15,8 +15,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:logo="@drawable/ic_logo"
         app:title="My Distributor" />
+    <!--  ^__________-app:logo="@drawable/ic_logo"-->
 
     <FrameLayout
         android:id="@+id/fragment_container"

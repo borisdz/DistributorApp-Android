@@ -3,4 +3,12 @@
     <string name="loginLabel">Login</string>
     <string name="passwordLabel">Password</string>
     <string name="emailLabel">Email</string>
+    <string name="search_articles">Search articles</string>
+    <string name="review_order">Review Order</string>
+    <string name="user_name">User Name</string>
+    <string name="my_orders">My Orders</string>
+    <string name="my_deliveries">My Deliveries</string>
+    <string name="my_pro_formas">My Pro Formas</string>
+    <string name="app_settings">App Settings</string>
+    <string name="logout">Logout</string>
 </resources>
