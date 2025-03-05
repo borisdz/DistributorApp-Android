@@ -10,10 +10,13 @@ import android.widget.Toast
 import androidx.lifecycle.viewmodel.viewModelFactory
 import androidx.recyclerview.widget.LinearLayoutManager
 import mk.ukim.finki.my_distributor.R
+import mk.ukim.finki.my_distributor.data.api.RetrofitClient
+import mk.ukim.finki.my_distributor.data.repository.CustomerRepository
 import mk.ukim.finki.my_distributor.databinding.FragmentCustomerDashboardBinding
 import mk.ukim.finki.my_distributor.domain.OrderDto
 import mk.ukim.finki.my_distributor.ui.adapters.OrdersAdapter
 import mk.ukim.finki.my_distributor.ui.viewmodel.CustomerDashboardViewModel
+import mk.ukim.finki.my_distributor.ui.viewmodel.CustomerDashboardViewModelFactory
 import mk.ukim.finki.my_distributor.util.Resource
 
 class CustomerDashboardFragment : Fragment() {
@@ -21,7 +24,13 @@ class CustomerDashboardFragment : Fragment() {
     private var _binding: FragmentCustomerDashboardBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: CustomerDashboardViewModel by viewModels { viewModelFactory }
+    private val viewModel: CustomerDashboardViewModel by viewModels {
+        CustomerDashboardViewModelFactory(
+            CustomerRepository(
+                RetrofitClient.dashboardApiService
+            )
+        )
+    }
 
     private lateinit var ordersAdapter: OrdersAdapter
 //    private lateinit var deliveriesAdapter: DeliveriesAdapter
