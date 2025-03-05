@@ -11,4 +11,13 @@
     <string name="my_pro_formas">My Pro Formas</string>
     <string name="app_settings">App Settings</string>
     <string name="logout">Logout</string>
+    <string name="current_orders">Current Orders</string>
+    <string name="current_deliveries">Current Deliveries</string>
+    <string name="current_pro_formas">Current Pro Formas</string>
+    <string name="order_no">Order #</string>
+    <string name="order_summary_details_here">Order summary details here</string>
+    <string name="delivery_no">Delivery #</string>
+    <string name="delivery_summary_details_here">Delivery summary details here</string>
+    <string name="pro_forma_no">Pro Forma #</string>
+    <string name="pro_forma_summary_details_here">Pro Forma summary details here.</string>
 </resources>
