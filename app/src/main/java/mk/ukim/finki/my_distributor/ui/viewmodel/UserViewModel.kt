@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import mk.ukim.finki.my_distributor.data.api.RetrofitClient
 import mk.ukim.finki.my_distributor.data.repository.UserRepository
-import mk.ukim.finki.my_distributor.domain.UserDto
+import mk.ukim.finki.my_distributor.domain.dto.UserDto
 
 class UserViewModel : ViewModel() {
     private val userRepository = UserRepository(RetrofitClient.userApiService)
