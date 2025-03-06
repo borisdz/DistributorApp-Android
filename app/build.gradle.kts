@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -53,6 +54,8 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+
     // Retrofit for HTTP requests
     implementation(libs.retrofit)
     // Gson converter to serialize/deserialize JSON
@@ -62,5 +65,11 @@ dependencies {
     // Optional: OkHttp logging interceptor for debugging network calls
     implementation(libs.logging.interceptor)
 
-    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.room.runtime)
+    implementation(libs.androidx.room.ktx)
+    implementation(libs.kotlinx.coroutines.android.v164)
+    ksp(libs.androidx.room.compiler.v261)
+
+    implementation(libs.androidx.security.crypto)
+
 }

@@ -1,9 +1,8 @@
 package mk.ukim.finki.my_distributor.data.repository
 
 import mk.ukim.finki.my_distributor.data.api.AuthApiService
-import mk.ukim.finki.my_distributor.domain.LoginRequestDto
-import mk.ukim.finki.my_distributor.domain.LoginResponseDto
-import mk.ukim.finki.my_distributor.domain.UserDto
+import mk.ukim.finki.my_distributor.domain.dto.LoginRequestDto
+import mk.ukim.finki.my_distributor.domain.dto.LoginResponseDto
 
 class AuthRepository(private val authApiService: AuthApiService) {
     suspend fun login(email: String, password: String): Result<LoginResponseDto> {

@@ -6,11 +6,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import mk.ukim.finki.my_distributor.data.api.RetrofitClient
+import mk.ukim.finki.my_distributor.data.local.UserPreferences
 import mk.ukim.finki.my_distributor.data.repository.AuthRepository
-import mk.ukim.finki.my_distributor.domain.LoginResponseDto
+import mk.ukim.finki.my_distributor.domain.dto.LoginResponseDto
 
-class AuthViewModel : ViewModel() {
-    private val authRepository = AuthRepository(RetrofitClient.authApiService)
+class AuthViewModel(
+    private val authRepository: AuthRepository,
+    private val userPreferences: UserPreferences
+) : ViewModel() {
 
     private val _loginResponse = MutableLiveData<LoginResponseDto>()
     val loginResponse: LiveData<LoginResponseDto> get() = _loginResponse
@@ -21,8 +24,13 @@ class AuthViewModel : ViewModel() {
     fun login(email: String, password: String){
         viewModelScope.launch {
             authRepository.login(email,password)
-                .onSuccess { _loginResponse.postValue(it) }
-                .onFailure { _error.postValue(it.message) }
+                .onSuccess { response ->
+                    userPreferences.saveUser(response)
+                    _loginResponse.postValue(response)
+                }
+                .onFailure { exception ->
+                    _error.postValue(exception.message)
+                }
         }
     }
 }

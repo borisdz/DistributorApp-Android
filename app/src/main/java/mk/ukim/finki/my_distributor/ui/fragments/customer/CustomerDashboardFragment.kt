@@ -7,13 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.lifecycle.viewmodel.viewModelFactory
 import androidx.recyclerview.widget.LinearLayoutManager
-import mk.ukim.finki.my_distributor.R
+import com.google.gson.Gson
 import mk.ukim.finki.my_distributor.data.api.RetrofitClient
+import mk.ukim.finki.my_distributor.data.local.DatabaseProvider
+import mk.ukim.finki.my_distributor.data.local.UserPreferences
 import mk.ukim.finki.my_distributor.data.repository.CustomerRepository
 import mk.ukim.finki.my_distributor.databinding.FragmentCustomerDashboardBinding
-import mk.ukim.finki.my_distributor.domain.OrderDto
 import mk.ukim.finki.my_distributor.ui.adapters.OrdersAdapter
 import mk.ukim.finki.my_distributor.ui.viewmodel.CustomerDashboardViewModel
 import mk.ukim.finki.my_distributor.ui.viewmodel.CustomerDashboardViewModelFactory
@@ -23,13 +23,16 @@ class CustomerDashboardFragment : Fragment() {
 
     private var _binding: FragmentCustomerDashboardBinding? = null
     private val binding get() = _binding!!
+    private val customerRepository: CustomerRepository by lazy {
+        CustomerRepository(
+            RetrofitClient.dashboardApiService,
+            DatabaseProvider.getDatabase(requireContext()).dashboardDataDao(),
+            Gson()
+        )
+    }
 
     private val viewModel: CustomerDashboardViewModel by viewModels {
-        CustomerDashboardViewModelFactory(
-            CustomerRepository(
-                RetrofitClient.dashboardApiService
-            )
-        )
+        CustomerDashboardViewModelFactory(customerRepository)
     }
 
     private lateinit var ordersAdapter: OrdersAdapter

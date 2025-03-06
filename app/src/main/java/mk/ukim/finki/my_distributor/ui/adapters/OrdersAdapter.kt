@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import mk.ukim.finki.my_distributor.databinding.ItemOrderBinding
-import mk.ukim.finki.my_distributor.domain.OrderDto
+import mk.ukim.finki.my_distributor.domain.dto.OrderDto
 
 class OrdersAdapter(
     private var orders: List<OrderDto>,

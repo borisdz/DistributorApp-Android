@@ -1,4 +1,4 @@
-package mk.ukim.finki.my_distributor.domain
+package mk.ukim.finki.my_distributor.domain.dto
 
 data class CustomerDashboardData(
     val orders: List<OrderDto>,
