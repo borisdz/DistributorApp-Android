@@ -23,6 +23,7 @@ class CustomerDashboardFragment : Fragment() {
 
     private var _binding: FragmentCustomerDashboardBinding? = null
     private val binding get() = _binding!!
+    
     private val customerRepository: CustomerRepository by lazy {
         CustomerRepository(
             RetrofitClient.dashboardApiService,
@@ -52,9 +53,9 @@ class CustomerDashboardFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.ordersRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-//        ordersAdapter = OrdersAdapter(emptyList()) {
-//            // Handle order click - navigate to details.
-//        }
+        ordersAdapter = OrdersAdapter(emptyList()) {
+            // Handle order click - navigate to details.
+        }
         binding.ordersRecyclerView.adapter = ordersAdapter
 
         viewModel.dashboardData.observe(viewLifecycleOwner) { resource ->

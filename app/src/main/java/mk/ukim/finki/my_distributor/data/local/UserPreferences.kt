@@ -36,7 +36,7 @@ class UserPreferences(context: Context) {
     }
 
     fun getUser(): LoginResponseDto? {
-        val userId = sharedPreferences.getLong("userId",0)
+        val userId = sharedPreferences.getLong("userId", 0)
         if (userId == 0L) return null
         return LoginResponseDto(
             userId = userId,
@@ -54,5 +54,18 @@ class UserPreferences(context: Context) {
 
     fun clearUser() {
         sharedPreferences.edit().clear().apply()
+    }
+
+    companion object {
+        @Volatile
+        private var INSTANCE: UserPreferences? = null
+
+        fun getInstance(context: Context): UserPreferences {
+            return INSTANCE ?: synchronized(this) {
+                val instance = UserPreferences(context.applicationContext)
+                INSTANCE = instance
+                instance
+            }
+        }
     }
 }

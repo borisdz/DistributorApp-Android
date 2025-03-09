@@ -9,13 +9,25 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import mk.ukim.finki.my_distributor.R
+import mk.ukim.finki.my_distributor.data.api.RetrofitClient
+import mk.ukim.finki.my_distributor.data.local.UserPreferences
+import mk.ukim.finki.my_distributor.data.repository.AuthRepository
 import mk.ukim.finki.my_distributor.databinding.ActivityLoginBinding
 import mk.ukim.finki.my_distributor.ui.viewmodel.AuthViewModel
+import mk.ukim.finki.my_distributor.ui.viewmodel.AuthViewModelFactory
 
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
-    private val viewModel: AuthViewModel by viewModels()
+
+    private val userPreferences by lazy { UserPreferences.getInstance(this) }
+
+    private val authRepository by lazy { AuthRepository(RetrofitClient.authApiService) }
+
+    private val viewModel: AuthViewModel by viewModels {
+        AuthViewModelFactory(authRepository,userPreferences)
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

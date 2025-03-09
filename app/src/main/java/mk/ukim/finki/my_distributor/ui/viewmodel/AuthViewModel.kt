@@ -21,9 +21,9 @@ class AuthViewModel(
     private val _error = MutableLiveData<String>()
     val error: LiveData<String> get() = _error
 
-    fun login(email: String, password: String){
+    fun login(email: String, password: String) {
         viewModelScope.launch {
-            authRepository.login(email,password)
+            authRepository.login(email, password)
                 .onSuccess { response ->
                     userPreferences.saveUser(response)
                     _loginResponse.postValue(response)
