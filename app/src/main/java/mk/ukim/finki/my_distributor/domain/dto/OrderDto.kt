@@ -1,7 +1,16 @@
 package mk.ukim.finki.my_distributor.domain.dto
 
+import java.sql.Date
+import java.time.LocalDateTime
+
 data class OrderDto(
-    val id: Int,
-    val title: String,
-    val summary: String
+    val id: Long,
+    val ordDate: Date,
+    val ordSum: Int,
+    val ordFulfillmentDate: LocalDateTime,
+    val ordComment: String,
+    val oStatusId: Short,
+    val customerId: Long,
+    val deliveryId: Long,
+    val pfId: Long
 )

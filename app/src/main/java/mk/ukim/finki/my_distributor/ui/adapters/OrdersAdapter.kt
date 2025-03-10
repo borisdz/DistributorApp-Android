@@ -1,5 +1,6 @@
 package mk.ukim.finki.my_distributor.ui.adapters
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -13,9 +14,10 @@ class OrdersAdapter(
 
     inner class OrderViewHolder(private val binding: ItemOrderBinding) :
         RecyclerView.ViewHolder(binding.root) {
+        @SuppressLint("SetTextI18n")
         fun bind(order: OrderDto) {
-            binding.orderTitle.text = order.title
-            binding.orderSummary.text = order.summary
+            binding.orderTitle.text = order.customerId.toString()
+            binding.orderSummary.text = order.ordSum.toString()
             binding.root.setOnClickListener { onItemClicked(order) }
         }
     }
