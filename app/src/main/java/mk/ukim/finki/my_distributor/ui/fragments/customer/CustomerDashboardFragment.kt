@@ -1,5 +1,6 @@
 package mk.ukim.finki.my_distributor.ui.fragments.customer
 
+import android.content.Context
 import androidx.fragment.app.viewModels
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -24,13 +25,7 @@ class CustomerDashboardFragment : Fragment() {
     private var _binding: FragmentCustomerDashboardBinding? = null
     private val binding get() = _binding!!
     
-    private val customerRepository: CustomerRepository by lazy {
-        CustomerRepository(
-            RetrofitClient.dashboardApiService,
-            DatabaseProvider.getDatabase(requireContext()).dashboardDataDao(),
-            Gson()
-        )
-    }
+    private lateinit var customerRepository: CustomerRepository
 
     private val viewModel: CustomerDashboardViewModel by viewModels {
         CustomerDashboardViewModelFactory(customerRepository)
@@ -39,6 +34,15 @@ class CustomerDashboardFragment : Fragment() {
     private lateinit var ordersAdapter: OrdersAdapter
 //    private lateinit var deliveriesAdapter: DeliveriesAdapter
 //    private lateinit var proFormasAdapter: ProFormasAdapter
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        customerRepository = CustomerRepository(
+            RetrofitClient.getDashboardApiService(userPreferences = UserPreferences(context)),
+            DatabaseProvider.getDatabase(requireContext()).dashboardDataDao(),
+            Gson()
+        )
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,

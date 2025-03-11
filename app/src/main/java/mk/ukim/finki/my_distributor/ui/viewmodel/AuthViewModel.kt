@@ -9,6 +9,7 @@ import mk.ukim.finki.my_distributor.data.api.RetrofitClient
 import mk.ukim.finki.my_distributor.data.local.UserPreferences
 import mk.ukim.finki.my_distributor.data.repository.AuthRepository
 import mk.ukim.finki.my_distributor.domain.dto.LoginResponseDto
+import mk.ukim.finki.my_distributor.util.decodeJwtToken
 
 class AuthViewModel(
     private val authRepository: AuthRepository,
@@ -25,7 +26,9 @@ class AuthViewModel(
         viewModelScope.launch {
             authRepository.login(email, password)
                 .onSuccess { response ->
-                    userPreferences.saveUser(response)
+                    userPreferences.saveToken(response.token)
+                    val decoded = decodeJwtToken(response.token)
+
                     _loginResponse.postValue(response)
                 }
                 .onFailure { exception ->

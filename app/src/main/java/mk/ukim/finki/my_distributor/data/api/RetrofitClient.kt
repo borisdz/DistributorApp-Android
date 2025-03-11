@@ -1,5 +1,7 @@
 package mk.ukim.finki.my_distributor.data.api;
 
+import mk.ukim.finki.my_distributor.data.local.UserPreferences
+import mk.ukim.finki.my_distributor.util.AuthInterceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -12,27 +14,30 @@ object RetrofitClient {
         level = HttpLoggingInterceptor.Level.BODY
     }
     
-    private val okHttpClient = getUnsafeOkHttpClient().newBuilder()
-        .addInterceptor(loggingInterceptor)
-        .build()
+    fun getOkHttpClient(userPreferences: UserPreferences) : OkHttpClient {
+        return getUnsafeOkHttpClient().newBuilder()
+            .addInterceptor(AuthInterceptor(userPreferences))
+            .addInterceptor(loggingInterceptor)
+            .build()
+    }
 
-    private val retrofit: Retrofit by lazy {
-        Retrofit.Builder()
+    fun getRetrofit(userPreferences: UserPreferences): Retrofit {
+        return Retrofit.Builder()
             .baseUrl(BASE_URL)
-            .client(okHttpClient)
+            .client(getOkHttpClient(userPreferences))
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
 
-    val userApiService: UserApiService by lazy {
-        retrofit.create(UserApiService::class.java)
+    fun getUserApiService(userPreferences: UserPreferences): UserApiService {
+        return getRetrofit(userPreferences).create(UserApiService::class.java)
     }
 
-    val authApiService: AuthApiService by lazy {
-        retrofit.create(AuthApiService::class.java)
+    fun getAuthApiService(userPreferences: UserPreferences): AuthApiService {
+        return getRetrofit(userPreferences).create(AuthApiService::class.java)
     }
 
-    val dashboardApiService: DashboardApiService by lazy {
-        retrofit.create(DashboardApiService::class.java)
+    fun getDashboardApiService(userPreferences: UserPreferences): DashboardApiService {
+        return getRetrofit(userPreferences).create(DashboardApiService::class.java)
     }
 }

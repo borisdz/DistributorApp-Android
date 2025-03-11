@@ -6,11 +6,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import mk.ukim.finki.my_distributor.data.api.RetrofitClient
+import mk.ukim.finki.my_distributor.data.local.UserPreferences
 import mk.ukim.finki.my_distributor.data.repository.UserRepository
 import mk.ukim.finki.my_distributor.domain.dto.UserDto
 
-class UserViewModel : ViewModel() {
-    private val userRepository = UserRepository(RetrofitClient.userApiService)
+class UserViewModel(private val userRepository: UserRepository) : ViewModel() {
 
     private val _userResponse = MutableLiveData<UserDto>()
     val userResponse: LiveData<UserDto> get() = _userResponse

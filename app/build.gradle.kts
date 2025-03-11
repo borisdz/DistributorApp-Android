@@ -72,4 +72,6 @@ dependencies {
 
     implementation(libs.androidx.security.crypto)
 
+    implementation(libs.jwtdecode)
+
 }
