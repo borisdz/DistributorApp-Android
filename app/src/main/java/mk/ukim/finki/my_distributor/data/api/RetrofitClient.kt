@@ -14,14 +14,15 @@ object RetrofitClient {
         level = HttpLoggingInterceptor.Level.BODY
     }
     
-    fun getOkHttpClient(userPreferences: UserPreferences) : OkHttpClient {
+    private fun getOkHttpClient(userPreferences: UserPreferences) : OkHttpClient {
         return getUnsafeOkHttpClient().newBuilder()
             .addInterceptor(AuthInterceptor(userPreferences))
             .addInterceptor(loggingInterceptor)
+            .followRedirects(false)
             .build()
     }
 
-    fun getRetrofit(userPreferences: UserPreferences): Retrofit {
+    private fun getRetrofit(userPreferences: UserPreferences): Retrofit {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
             .client(getOkHttpClient(userPreferences))
