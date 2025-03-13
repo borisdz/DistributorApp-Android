@@ -1,20 +1,31 @@
 package mk.ukim.finki.my_distributor.data.api;
 
+import android.annotation.SuppressLint
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import mk.ukim.finki.my_distributor.data.local.UserPreferences
 import mk.ukim.finki.my_distributor.util.AuthInterceptor
+import mk.ukim.finki.my_distributor.util.LocalDateTimeAdapter
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.time.LocalDateTime
 
 object RetrofitClient {
     private const val BASE_URL = "https://10.0.2.2:8443/"
 
+    @SuppressLint("NewApi")
+    val customGson: Gson = GsonBuilder()
+        .setDateFormat("yyyy-MM-dd")
+        .registerTypeAdapter(LocalDateTime::class.java, LocalDateTimeAdapter())
+        .create()
+
     private val loggingInterceptor = HttpLoggingInterceptor().apply {
         level = HttpLoggingInterceptor.Level.BODY
     }
-    
-    private fun getOkHttpClient(userPreferences: UserPreferences) : OkHttpClient {
+
+    private fun getOkHttpClient(userPreferences: UserPreferences): OkHttpClient {
         return getUnsafeOkHttpClient().newBuilder()
             .addInterceptor(AuthInterceptor(userPreferences))
             .addInterceptor(loggingInterceptor)
@@ -26,7 +37,7 @@ object RetrofitClient {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
             .client(getOkHttpClient(userPreferences))
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(customGson))
             .build()
     }
 

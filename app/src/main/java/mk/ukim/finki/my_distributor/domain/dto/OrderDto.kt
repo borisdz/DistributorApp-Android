@@ -7,10 +7,10 @@ data class OrderDto(
     val id: Long,
     val ordDate: Date,
     val ordSum: Int,
-    val ordFulfillmentDate: LocalDateTime,
-    val ordComment: String,
+    val ordFulfillmentDate: LocalDateTime?,
+    val ordComment: String?,
     val oStatusId: Short,
     val customerId: Long,
-    val deliveryId: Long,
-    val pfId: Long
+    val deliveryId: Long?,
+    val pfId: Long?
 )
