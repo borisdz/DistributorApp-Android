@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import mk.ukim.finki.my_distributor.R
+import mk.ukim.finki.my_distributor.ui.viewmodel.ProfileViewModel
 
 class ProfileFragment : Fragment() {
 

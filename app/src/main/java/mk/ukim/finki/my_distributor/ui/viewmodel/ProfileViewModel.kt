@@ -1,4 +1,4 @@
-package mk.ukim.finki.my_distributor.ui.fragments.customer
+package mk.ukim.finki.my_distributor.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 

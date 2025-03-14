@@ -52,4 +52,8 @@ object RetrofitClient {
     fun getDashboardApiService(userPreferences: UserPreferences): DashboardApiService {
         return getRetrofit(userPreferences).create(DashboardApiService::class.java)
     }
+
+    fun getArticleApiService(userPreferences: UserPreferences): ArticleApiService {
+        return getRetrofit(userPreferences).create(ArticleApiService::class.java)
+    }
 }

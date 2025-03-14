@@ -14,13 +14,9 @@ class CustomerRepository(
     private val dashboardApiService: DashboardApiService,
     private val dashboardDataDao: DashboardDataDao,
     private val gson: Gson = Gson()
-//    private val userPreferences: UserPreferences
 ) {
 
     suspend fun fetchDashboardData(customerId: Long): Resource<CustomerDashboardData> {
-//        val user = userPreferences.getUser() ?: return Resource.Error("No logged-in user found")
-//
-//        val customerId = user.userId
 
         return withContext(Dispatchers.IO) {
             try {
