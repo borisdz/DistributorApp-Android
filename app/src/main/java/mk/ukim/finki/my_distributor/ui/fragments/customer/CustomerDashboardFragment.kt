@@ -15,7 +15,9 @@ import mk.ukim.finki.my_distributor.data.local.DatabaseProvider
 import mk.ukim.finki.my_distributor.data.local.UserPreferences
 import mk.ukim.finki.my_distributor.data.repository.CustomerRepository
 import mk.ukim.finki.my_distributor.databinding.FragmentCustomerDashboardBinding
+import mk.ukim.finki.my_distributor.ui.adapters.DeliveriesAdapter
 import mk.ukim.finki.my_distributor.ui.adapters.OrdersAdapter
+import mk.ukim.finki.my_distributor.ui.adapters.ProFormasAdapter
 import mk.ukim.finki.my_distributor.ui.viewmodel.CustomerDashboardViewModel
 import mk.ukim.finki.my_distributor.ui.viewmodel.CustomerDashboardViewModelFactory
 import mk.ukim.finki.my_distributor.util.Resource
@@ -32,8 +34,8 @@ class CustomerDashboardFragment : Fragment() {
     }
 
     private lateinit var ordersAdapter: OrdersAdapter
-//    private lateinit var deliveriesAdapter: DeliveriesAdapter
-//    private lateinit var proFormasAdapter: ProFormasAdapter
+    private lateinit var deliveriesAdapter: DeliveriesAdapter
+    private lateinit var proFormasAdapter: ProFormasAdapter
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -62,6 +64,19 @@ class CustomerDashboardFragment : Fragment() {
         }
         binding.ordersRecyclerView.adapter = ordersAdapter
 
+        binding.deliveriesRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+        deliveriesAdapter = DeliveriesAdapter(emptyList()){
+            // Handle delivery click - navigate to details.
+        }
+        binding.deliveriesRecyclerView.adapter = deliveriesAdapter
+
+        binding.proFormasRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+        proFormasAdapter = ProFormasAdapter(emptyList()){
+            // Handle proForma click - navigate to details
+        }
+        binding.proFormasRecyclerView.adapter = proFormasAdapter
+
+
         viewModel.dashboardData.observe(viewLifecycleOwner) { resource ->
             when(resource) {
                 is Resource.Loading -> {
@@ -70,6 +85,8 @@ class CustomerDashboardFragment : Fragment() {
                 is Resource.Success -> {
                     val data = resource.data
                     ordersAdapter.updateData(data.orders)
+                    deliveriesAdapter.updateData(data.deliveries)
+                    proFormasAdapter.updateData(data.proFormas)
                 }
                 is Resource.Error -> {
                     Toast.makeText(requireContext(), resource.message, Toast.LENGTH_SHORT).show()
