@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import mk.ukim.finki.my_distributor.data.local.UserPreferences
 import mk.ukim.finki.my_distributor.data.repository.CustomerRepository
 import mk.ukim.finki.my_distributor.domain.dto.CustomerDashboardData
 import mk.ukim.finki.my_distributor.util.Resource

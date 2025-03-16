@@ -1,6 +1,9 @@
 package mk.ukim.finki.my_distributor.ui.adapters
 
+import android.view.LayoutInflater
+import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import mk.ukim.finki.my_distributor.databinding.ItemArticleBinding
 import mk.ukim.finki.my_distributor.domain.dto.ArticleDto
 
 class ArticlesAdapter(
@@ -13,8 +16,29 @@ class ArticlesAdapter(
                 fun bind(article: ArticleDto){
                     binding.articleName.text = article.name
                     binding.articlePrice.text = "${article.price}"
-                    binding.root.setOnClickListner { onArticleClicked(article) }
-
+                    binding.root.setOnClickListener { onArticleClicked(article) }
                 }
             }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleViewHolder {
+        val binding = ItemArticleBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
+        )
+        return ArticleViewHolder(binding)
+    }
+
+    override fun getItemCount(): Int {
+        return articles.size
+    }
+
+    override fun onBindViewHolder(holder: ArticleViewHolder, position: Int) {
+        holder.bind(articles[position])
+    }
+
+    fun updateData(newArticles: List<ArticleDto>){
+        articles = newArticles
+        notifyDataSetChanged()
+    }
 }
