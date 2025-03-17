@@ -2,9 +2,11 @@ package mk.ukim.finki.my_distributor.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import mk.ukim.finki.my_distributor.databinding.ItemArticleBinding
 import mk.ukim.finki.my_distributor.domain.dto.ArticleDto
+import mk.ukim.finki.my_distributor.util.callbacks.ArticleDiffCallback
 
 class ArticlesAdapter(
     private var articles: List<ArticleDto>,
@@ -12,13 +14,13 @@ class ArticlesAdapter(
 ) : RecyclerView.Adapter<ArticlesAdapter.ArticleViewHolder>() {
 
     inner class ArticleViewHolder(private val binding: ItemArticleBinding) :
-            RecyclerView.ViewHolder(binding.root) {
-                fun bind(article: ArticleDto){
-                    binding.articleName.text = article.name
-                    binding.articlePrice.text = "${article.price}"
-                    binding.root.setOnClickListener { onArticleClicked(article) }
-                }
-            }
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(article: ArticleDto) {
+            binding.articleName.text = article.name
+            binding.articlePrice.text = "${article.price}"
+            binding.root.setOnClickListener { onArticleClicked(article) }
+        }
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleViewHolder {
         val binding = ItemArticleBinding.inflate(
@@ -37,8 +39,10 @@ class ArticlesAdapter(
         holder.bind(articles[position])
     }
 
-    fun updateData(newArticles: List<ArticleDto>){
-        articles = newArticles
-        notifyDataSetChanged()
+    fun updateData(newArticles: List<ArticleDto>) {
+        val diffCallback = ArticleDiffCallback(this.articles, newArticles)
+        val diffResult = DiffUtil.calculateDiff(diffCallback)
+        this.articles = newArticles
+        diffResult.dispatchUpdatesTo(this)
     }
 }
