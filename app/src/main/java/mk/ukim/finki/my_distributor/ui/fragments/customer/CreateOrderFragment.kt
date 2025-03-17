@@ -1,5 +1,6 @@
 package mk.ukim.finki.my_distributor.ui.fragments.customer
 
+import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -10,6 +11,8 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import mk.ukim.finki.my_distributor.data.api.RetrofitClient
+import mk.ukim.finki.my_distributor.data.local.UserPreferences
 import mk.ukim.finki.my_distributor.data.repository.ArticlesRepository
 import mk.ukim.finki.my_distributor.databinding.FragmentCreateOrderBinding
 import mk.ukim.finki.my_distributor.ui.adapters.ArticlesAdapter
@@ -27,6 +30,13 @@ class CreateOrderFragment : Fragment() {
 
     private val viewModel: CreateOrderViewModel by viewModels {
         CreateOrderViewModelFactory(articlesRepository)
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        articlesRepository = ArticlesRepository(
+            RetrofitClient.getArticleApiService(userPreferences = UserPreferences(context))
+        )
     }
 
     override fun onCreateView(
