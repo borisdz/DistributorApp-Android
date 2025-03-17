@@ -20,4 +20,15 @@
     <string name="delivery_summary_details_here">Delivery summary details here</string>
     <string name="pro_forma_no">Pro Forma #</string>
     <string name="pro_forma_summary_details_here">Pro Forma summary details here.</string>
+    <string name="select_quantity">Select Quantity</string>
+    <string name="enter_quantity">Enter quantity</string>
+    <string name="add_to_order">Add to Order</string>
+    <string name="edit_order">Edit Order</string>
+    <string name="cancel_order">Cancel Order</string>
+    <string name="complete_order">Complete Order</string>
+    <string name="article_name">Article Name</string>
+    <string name="zero_dollars">$0.00</string>
+    <string name="zero_quantity">Qty: 0</string>
+    <string name="pro_forma">Pro Forma</string>
+    <string name="cash">Cash</string>
 </resources>

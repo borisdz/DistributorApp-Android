@@ -56,4 +56,8 @@ object RetrofitClient {
     fun getArticleApiService(userPreferences: UserPreferences): ArticleApiService {
         return getRetrofit(userPreferences).create(ArticleApiService::class.java)
     }
+
+    fun getOrderApiService(userPreferences: UserPreferences): OrderApiService {
+        return getRetrofit(userPreferences).create(OrderApiService::class.java)
+    }
 }

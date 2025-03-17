@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/customerDashboardFragment">
+
+    <fragment
+        android:id="@+id/createOrderFragment"
+        android:name="mk.ukim.finki.my_distributor.ui.fragments.customer.CreateOrderFragment"
+        android:label="Create Order">
+        <action
+            android:id="@+id/action_createOrderFragment_to_orderReviewFragment"
+            app:destination="@id/orderReviewFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/orderReviewFragment"
+        android:name="mk.ukim.finki.my_distributor.ui.fragments.customer.OrderReviewFragment"
+        android:label="Order Review">
+        <action
+            android:id="@+id/action_orderReviewFragment_to_createOrderFragment"
+            app:destination="@+id/createOrderFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="mk.ukim.finki.my_distributor.ui.fragments.customer.ProfileFragment"
+        android:label="Profile"/>
+
+    <fragment
+        android:id="@+id/customerDashboardFragment"
+        android:name="mk.ukim.finki.my_distributor.ui.fragments.customer.CustomerDashboardFragment"
+        android:label="Dashboard"/>
+</navigation>

@@ -1,3 +1,5 @@
+import org.gradle.kotlin.dsl.implementation
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -73,5 +75,9 @@ dependencies {
     implementation(libs.androidx.security.crypto)
 
     implementation(libs.jwtdecode)
+
+    // Navigation Component dependencies:
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
 
 }

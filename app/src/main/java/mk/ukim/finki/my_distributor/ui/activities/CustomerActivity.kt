@@ -3,16 +3,16 @@ package mk.ukim.finki.my_distributor.ui.activities
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
 import mk.ukim.finki.my_distributor.R
 import mk.ukim.finki.my_distributor.databinding.ActivityCustomerBinding
-import mk.ukim.finki.my_distributor.ui.fragments.customer.CreateOrderFragment
-import mk.ukim.finki.my_distributor.ui.fragments.customer.CustomerDashboardFragment
-import mk.ukim.finki.my_distributor.ui.fragments.customer.ProfileFragment
 
 class CustomerActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityCustomerBinding
+    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,25 +21,14 @@ class CustomerActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(binding.root)
 
-        // TODO: Implement customer activity logic
+        val navHostFragment = supportFragmentManager
+            .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        navController = navHostFragment.navController
 
-        val bottomNav = findViewById<BottomNavigationView>(binding.bottomNavigation.id)
+        binding.bottomNavigation.setupWithNavController(navController)
+    }
 
-        bottomNav.setOnItemSelectedListener { item->
-            val selectedFragment = when (item.itemId) {
-                R.id.nav_dashboard -> CustomerDashboardFragment()
-                R.id.nav_create_order -> CreateOrderFragment()
-                R.id.nav_profile -> ProfileFragment()
-                else -> CustomerDashboardFragment()
-            }
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container,selectedFragment)
-                .commit()
-            true
-        }
-
-        if (savedInstanceState == null){
-            bottomNav.selectedItemId = R.id.nav_dashboard
-        }
+    override fun onSupportNavigateUp(): Boolean {
+        return navController.navigateUp() || super.onSupportNavigateUp()
     }
 }
