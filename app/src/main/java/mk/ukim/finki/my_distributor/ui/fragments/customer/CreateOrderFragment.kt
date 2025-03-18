@@ -12,6 +12,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,12 +20,15 @@ import mk.ukim.finki.my_distributor.R
 import mk.ukim.finki.my_distributor.data.api.RetrofitClient
 import mk.ukim.finki.my_distributor.data.local.UserPreferences
 import mk.ukim.finki.my_distributor.data.repository.ArticlesRepository
+import mk.ukim.finki.my_distributor.data.repository.OrderRepository
 import mk.ukim.finki.my_distributor.databinding.FragmentCreateOrderBinding
 import mk.ukim.finki.my_distributor.domain.dto.ArticleDto
 import mk.ukim.finki.my_distributor.domain.dto.OrderItem
 import mk.ukim.finki.my_distributor.ui.adapters.ArticlesAdapter
 import mk.ukim.finki.my_distributor.ui.viewmodel.CreateOrderViewModel
 import mk.ukim.finki.my_distributor.ui.viewmodel.CreateOrderViewModelFactory
+import mk.ukim.finki.my_distributor.ui.viewmodel.OrderViewModel
+import mk.ukim.finki.my_distributor.ui.viewmodel.OrderViewModelFactory
 
 class CreateOrderFragment : Fragment() {
 
@@ -39,10 +43,14 @@ class CreateOrderFragment : Fragment() {
 
     private lateinit var articlesAdapter: ArticlesAdapter
 
-    private val orderItems = mutableListOf<OrderItem>()
-
-    private val viewModel: CreateOrderViewModel by viewModels {
+    private val createOrderViewModel: CreateOrderViewModel by viewModels {
         CreateOrderViewModelFactory(articlesRepository)
+    }
+
+    private val orderViewModel: OrderViewModel by activityViewModels {
+        OrderViewModelFactory(
+            OrderRepository(RetrofitClient.getOrderApiService(UserPreferences.getInstance(requireContext())))
+        )
     }
 
     override fun onCreateView(
@@ -62,16 +70,18 @@ class CreateOrderFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.articlesRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+
         articlesAdapter = ArticlesAdapter(emptyList()) { article ->
             showQuantityDialog(article)
         }
+
         binding.articlesRecyclerView.adapter = articlesAdapter
 
-        viewModel.articles.observe(viewLifecycleOwner) { articles ->
+        createOrderViewModel.articles.observe(viewLifecycleOwner) { articles ->
             articlesAdapter.updateData(articles)
         }
 
-        viewModel.error.observe(viewLifecycleOwner) { errorMsg ->
+        createOrderViewModel.error.observe(viewLifecycleOwner) { errorMsg ->
             Toast.makeText(
                 requireContext(),
                 "Error: $errorMsg",
@@ -83,7 +93,7 @@ class CreateOrderFragment : Fragment() {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                viewModel.searchArticles(s?.toString() ?: "")
+                createOrderViewModel.searchArticles(s?.toString() ?: "")
             }
 
             override fun afterTextChanged(s: Editable?) {}
@@ -116,7 +126,7 @@ class CreateOrderFragment : Fragment() {
             val quantityStr = quantityEditText.text.toString()
             val quantity = quantityStr.toIntOrNull()
             if (quantity != null && quantity > 0){
-                orderItems.add(OrderItem(article,quantity))
+                orderViewModel.addItem(OrderItem(article,quantity))
                 Toast.makeText(
                     requireContext(),
                     "Added ${article.name} x $quantity",

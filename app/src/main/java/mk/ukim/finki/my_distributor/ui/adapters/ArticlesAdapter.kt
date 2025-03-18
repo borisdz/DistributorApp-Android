@@ -10,7 +10,7 @@ import mk.ukim.finki.my_distributor.util.callbacks.ArticleDiffCallback
 
 class ArticlesAdapter(
     private var articles: List<ArticleDto>,
-    private val onArticleClicked: (ArticleDto) -> Unit
+    private val onAddClicked: (ArticleDto) -> Unit
 ) : RecyclerView.Adapter<ArticlesAdapter.ArticleViewHolder>() {
 
     inner class ArticleViewHolder(private val binding: ItemArticleBinding) :
@@ -18,7 +18,7 @@ class ArticlesAdapter(
         fun bind(article: ArticleDto) {
             binding.articleName.text = article.name
             binding.articlePrice.text = "${article.price}"
-            binding.root.setOnClickListener { onArticleClicked(article) }
+            binding.addArticleButton.setOnClickListener { onAddClicked(article) }
         }
     }
 
