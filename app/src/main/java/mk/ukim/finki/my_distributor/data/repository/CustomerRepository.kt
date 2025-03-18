@@ -3,7 +3,7 @@ package mk.ukim.finki.my_distributor.data.repository
 import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import mk.ukim.finki.my_distributor.data.api.DashboardApiService
+import mk.ukim.finki.my_distributor.data.api.service.DashboardApiService
 import mk.ukim.finki.my_distributor.data.local.DashboardDataDao
 import mk.ukim.finki.my_distributor.domain.DashboardDataEntity
 import mk.ukim.finki.my_distributor.domain.dto.CustomerDashboardData

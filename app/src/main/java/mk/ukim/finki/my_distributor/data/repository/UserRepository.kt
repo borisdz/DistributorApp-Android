@@ -1,6 +1,6 @@
 package mk.ukim.finki.my_distributor.data.repository
 
-import mk.ukim.finki.my_distributor.data.api.UserApiService
+import mk.ukim.finki.my_distributor.data.api.service.UserApiService
 import mk.ukim.finki.my_distributor.domain.dto.UserDto
 
 class UserRepository(private val userApiService: UserApiService) {

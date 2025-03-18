@@ -1,4 +1,4 @@
-package mk.ukim.finki.my_distributor.data.api
+package mk.ukim.finki.my_distributor.data.api.service
 
 import mk.ukim.finki.my_distributor.domain.dto.OrderSubmission
 import retrofit2.Response

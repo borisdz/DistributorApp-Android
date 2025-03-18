@@ -1,6 +1,6 @@
 package mk.ukim.finki.my_distributor.data.repository
 
-import mk.ukim.finki.my_distributor.data.api.AuthApiService
+import mk.ukim.finki.my_distributor.data.api.service.AuthApiService
 import mk.ukim.finki.my_distributor.domain.dto.LoginRequestDto
 import mk.ukim.finki.my_distributor.domain.dto.LoginResponseDto
 

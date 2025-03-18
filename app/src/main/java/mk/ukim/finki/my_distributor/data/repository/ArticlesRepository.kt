@@ -2,7 +2,7 @@ package mk.ukim.finki.my_distributor.data.repository
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import mk.ukim.finki.my_distributor.data.api.ArticleApiService
+import mk.ukim.finki.my_distributor.data.api.service.ArticleApiService
 import mk.ukim.finki.my_distributor.domain.dto.ArticleDto
 
 class ArticlesRepository(

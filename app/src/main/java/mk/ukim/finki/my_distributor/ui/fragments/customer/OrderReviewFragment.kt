@@ -1,9 +1,12 @@
 package mk.ukim.finki.my_distributor.ui.fragments.customer
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -25,12 +28,16 @@ class OrderReviewFragment : Fragment() {
     private var _binding: FragmentOrderReviewBinding? = null
     private val binding get() = _binding!!
 
-    private val orderItems = mutableListOf<OrderItem>()
-
     private lateinit var orderReviewAdapter: OrderReviewAdapter
 
     private val orderRepository: OrderRepository by lazy {
-        OrderRepository(RetrofitClient.getOrderApiService(userPreferences = UserPreferences(requireContext())))
+        OrderRepository(
+            RetrofitClient.getOrderApiService(
+                userPreferences = UserPreferences(
+                    requireContext()
+                )
+            )
+        )
     }
 
     private val orderViewModel: OrderViewModel by activityViewModels {
@@ -41,7 +48,7 @@ class OrderReviewFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentOrderReviewBinding.inflate(inflater,container,false)
+        _binding = FragmentOrderReviewBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -49,7 +56,14 @@ class OrderReviewFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.orderItemsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-        orderReviewAdapter = OrderReviewAdapter()
+        orderReviewAdapter = OrderReviewAdapter(
+            onEditClicked = { orderItem ->
+                showEditQuantityDialog(orderItem)
+            },
+            onDeleteClicked = { orderItem ->
+                orderViewModel.removeItem(orderItem)
+            }
+        )
         binding.orderItemsRecyclerView.adapter = orderReviewAdapter
 
         orderViewModel.orderItems.observe(viewLifecycleOwner) { orderItems ->
@@ -74,7 +88,7 @@ class OrderReviewFragment : Fragment() {
             ).show()
         }
         binding.completeOrderButton.setOnClickListener {
-            val paymentMethod = when(binding.paymentRadioGroup.checkedRadioButtonId){
+            val paymentMethod = when (binding.paymentRadioGroup.checkedRadioButtonId) {
                 R.id.radioProForma -> PaymentMethod.PRO_FORMA
                 R.id.radioCash -> PaymentMethod.CASH
                 else -> PaymentMethod.CASH
@@ -97,6 +111,43 @@ class OrderReviewFragment : Fragment() {
                 }
             }
         }
+    }
+
+
+    private fun showEditQuantityDialog(orderItem: OrderItem) {
+        val dialogView =
+            LayoutInflater.from(requireContext()).inflate(R.layout.dialog_add_article, null)
+        val quantityEditText = dialogView.findViewById<EditText>(R.id.quantityEditText)
+        val confirmButton = dialogView.findViewById<Button>(R.id.confirmQuantityButton)
+
+        quantityEditText.setText(orderItem.quantity.toString())
+
+        val dialog = AlertDialog.Builder(requireContext())
+            .setTitle("Edit ${orderItem.article.name}")
+            .setView(dialogView)
+            .setCancelable(true)
+            .create()
+
+        confirmButton.setOnClickListener {
+            val quantityStr = quantityEditText.text.toString()
+            val quantity = quantityStr.toIntOrNull()
+            if (quantity!=null && quantity>0) {
+                orderViewModel.updateItem(orderItem.copy(quantity=quantity))
+                Toast.makeText(
+                    requireContext(),
+                    "Updated ${orderItem.article.name} to $quantity",
+                    Toast.LENGTH_SHORT
+                ).show()
+                dialog.dismiss()
+            }else{
+                Toast.makeText(
+                    requireContext(),
+                    "Please enter a valid quantity",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+        dialog.show()
     }
 
     override fun onDestroyView() {

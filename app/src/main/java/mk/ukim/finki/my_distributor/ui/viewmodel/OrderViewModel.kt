@@ -56,4 +56,10 @@ class OrderViewModel(
             _orderSubmissionResult.value = result
         }
     }
+
+    fun removeItem(orderItem: OrderItem){
+        val current = _orderItems.value?.toMutableList() ?: mutableListOf()
+        current.removeAll { it.article.id == orderItem.article.id }
+        _orderItems.value = current
+    }
 }

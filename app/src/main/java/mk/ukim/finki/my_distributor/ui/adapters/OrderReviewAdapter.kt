@@ -10,7 +10,10 @@ import mk.ukim.finki.my_distributor.databinding.ItemOrderReviewBinding
 import mk.ukim.finki.my_distributor.domain.dto.OrderItem
 import mk.ukim.finki.my_distributor.util.callbacks.OrderReviewDiffCallback
 
-class OrderReviewAdapter : ListAdapter<OrderItem, OrderReviewAdapter.OrderReviewViewHolder>(OrderItemDiffCallback) {
+class OrderReviewAdapter(
+    private val onEditClicked: (OrderItem) -> Unit,
+    private val onDeleteClicked: (OrderItem) -> Unit
+) : ListAdapter<OrderItem, OrderReviewAdapter.OrderReviewViewHolder>(OrderItemDiffCallback) {
 
     inner class OrderReviewViewHolder(private val binding: ItemOrderReviewBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -20,6 +23,12 @@ class OrderReviewAdapter : ListAdapter<OrderItem, OrderReviewAdapter.OrderReview
             binding.articleName.text = orderItem.article.name
             binding.articleQuantity.text = "Qty: ${orderItem.quantity}"
             binding.articlePrice.text = "$${orderItem.article.price}"
+            binding.editItemButton.setOnClickListener {
+                onEditClicked(orderItem)
+            }
+            binding.deleteItemButton.setOnClickListener {
+                onDeleteClicked(orderItem)
+            }
         }
     }
 

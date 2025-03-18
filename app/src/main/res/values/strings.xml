@@ -31,4 +31,6 @@
     <string name="zero_quantity">Qty: 0</string>
     <string name="pro_forma">Pro Forma</string>
     <string name="cash">Cash</string>
+    <string name="edit_item">Edit item</string>
+    <string name="delete_item">Delete Item</string>
 </resources>

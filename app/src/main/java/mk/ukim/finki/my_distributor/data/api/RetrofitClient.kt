@@ -3,6 +3,11 @@ package mk.ukim.finki.my_distributor.data.api;
 import android.annotation.SuppressLint
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import mk.ukim.finki.my_distributor.data.api.service.ArticleApiService
+import mk.ukim.finki.my_distributor.data.api.service.AuthApiService
+import mk.ukim.finki.my_distributor.data.api.service.DashboardApiService
+import mk.ukim.finki.my_distributor.data.api.service.OrderApiService
+import mk.ukim.finki.my_distributor.data.api.service.UserApiService
 import mk.ukim.finki.my_distributor.data.local.UserPreferences
 import mk.ukim.finki.my_distributor.util.AuthInterceptor
 import mk.ukim.finki.my_distributor.util.LocalDateTimeAdapter
