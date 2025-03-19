@@ -2,9 +2,12 @@ package mk.ukim.finki.my_distributor.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import mk.ukim.finki.my_distributor.databinding.ItemProformaBinding
 import mk.ukim.finki.my_distributor.domain.dto.ProFormaDto
+import mk.ukim.finki.my_distributor.util.callbacks.ArticleDiffCallback
+import mk.ukim.finki.my_distributor.util.callbacks.ProFormaDiffCallback
 
 class ProFormasAdapter(
     private var proFormas: List<ProFormaDto>,
@@ -38,7 +41,9 @@ class ProFormasAdapter(
     }
 
     fun updateData(newProFormas: List<ProFormaDto>){
-        proFormas = newProFormas
-        notifyDataSetChanged()
+        val diffCallback = ProFormaDiffCallback(this.proFormas, newProFormas)
+        val diffResult = DiffUtil.calculateDiff(diffCallback)
+        this.proFormas = newProFormas
+        diffResult.dispatchUpdatesTo(this)
     }
 }

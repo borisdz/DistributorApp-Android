@@ -6,9 +6,6 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import mk.ukim.finki.my_distributor.R
 import mk.ukim.finki.my_distributor.data.api.RetrofitClient
 import mk.ukim.finki.my_distributor.data.local.UserPreferences
 import mk.ukim.finki.my_distributor.data.repository.AuthRepository

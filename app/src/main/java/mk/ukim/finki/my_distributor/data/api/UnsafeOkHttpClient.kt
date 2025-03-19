@@ -1,6 +1,5 @@
 package mk.ukim.finki.my_distributor.data.api
 
-import android.annotation.SuppressLint
 import okhttp3.OkHttpClient
 import java.security.SecureRandom
 import java.security.cert.X509Certificate

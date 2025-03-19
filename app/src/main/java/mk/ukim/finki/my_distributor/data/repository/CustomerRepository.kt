@@ -3,9 +3,8 @@ package mk.ukim.finki.my_distributor.data.repository
 import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import mk.ukim.finki.my_distributor.data.api.DashboardApiService
+import mk.ukim.finki.my_distributor.data.api.service.DashboardApiService
 import mk.ukim.finki.my_distributor.data.local.DashboardDataDao
-import mk.ukim.finki.my_distributor.data.local.UserPreferences
 import mk.ukim.finki.my_distributor.domain.DashboardDataEntity
 import mk.ukim.finki.my_distributor.domain.dto.CustomerDashboardData
 import mk.ukim.finki.my_distributor.util.Resource
@@ -14,13 +13,9 @@ class CustomerRepository(
     private val dashboardApiService: DashboardApiService,
     private val dashboardDataDao: DashboardDataDao,
     private val gson: Gson = Gson()
-//    private val userPreferences: UserPreferences
 ) {
 
     suspend fun fetchDashboardData(customerId: Long): Resource<CustomerDashboardData> {
-//        val user = userPreferences.getUser() ?: return Resource.Error("No logged-in user found")
-//
-//        val customerId = user.userId
 
         return withContext(Dispatchers.IO) {
             try {

@@ -3,9 +3,12 @@ package mk.ukim.finki.my_distributor.ui.adapters
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import mk.ukim.finki.my_distributor.databinding.ItemOrderBinding
 import mk.ukim.finki.my_distributor.domain.dto.OrderDto
+import mk.ukim.finki.my_distributor.util.callbacks.ArticleDiffCallback
+import mk.ukim.finki.my_distributor.util.callbacks.OrderDiffCallback
 
 class OrdersAdapter(
     private var orders: List<OrderDto>,
@@ -40,7 +43,9 @@ class OrdersAdapter(
     }
 
     fun updateData(newOrders: List<OrderDto>) {
-        orders = newOrders
-        notifyDataSetChanged()
+        val diffCallback = OrderDiffCallback(this.orders, newOrders)
+        val diffResult = DiffUtil.calculateDiff(diffCallback)
+        this.orders = newOrders
+        diffResult.dispatchUpdatesTo(this)
     }
 }

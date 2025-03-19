@@ -2,9 +2,12 @@ package mk.ukim.finki.my_distributor.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import mk.ukim.finki.my_distributor.databinding.ItemDeliveryBinding
 import mk.ukim.finki.my_distributor.domain.dto.DeliveryDto
+import mk.ukim.finki.my_distributor.util.callbacks.ArticleDiffCallback
+import mk.ukim.finki.my_distributor.util.callbacks.DeliveryDiffCallback
 
 class DeliveriesAdapter(
     private var deliveries: List<DeliveryDto>,
@@ -38,7 +41,9 @@ class DeliveriesAdapter(
     }
 
     fun updateData(newDeliveries: List<DeliveryDto>){
-        deliveries = newDeliveries
-        notifyDataSetChanged()
+        val diffCallback = DeliveryDiffCallback(this.deliveries, newDeliveries)
+        val diffResult = DiffUtil.calculateDiff(diffCallback)
+        this.deliveries = newDeliveries
+        diffResult.dispatchUpdatesTo(this)
     }
 }

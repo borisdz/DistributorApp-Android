@@ -3,6 +3,11 @@ package mk.ukim.finki.my_distributor.data.api;
 import android.annotation.SuppressLint
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import mk.ukim.finki.my_distributor.data.api.service.ArticleApiService
+import mk.ukim.finki.my_distributor.data.api.service.AuthApiService
+import mk.ukim.finki.my_distributor.data.api.service.DashboardApiService
+import mk.ukim.finki.my_distributor.data.api.service.OrderApiService
+import mk.ukim.finki.my_distributor.data.api.service.UserApiService
 import mk.ukim.finki.my_distributor.data.local.UserPreferences
 import mk.ukim.finki.my_distributor.util.AuthInterceptor
 import mk.ukim.finki.my_distributor.util.LocalDateTimeAdapter
@@ -51,5 +56,13 @@ object RetrofitClient {
 
     fun getDashboardApiService(userPreferences: UserPreferences): DashboardApiService {
         return getRetrofit(userPreferences).create(DashboardApiService::class.java)
+    }
+
+    fun getArticleApiService(userPreferences: UserPreferences): ArticleApiService {
+        return getRetrofit(userPreferences).create(ArticleApiService::class.java)
+    }
+
+    fun getOrderApiService(userPreferences: UserPreferences): OrderApiService {
+        return getRetrofit(userPreferences).create(OrderApiService::class.java)
     }
 }
