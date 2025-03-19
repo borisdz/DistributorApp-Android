@@ -19,8 +19,8 @@ class OrdersAdapter(
         RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("SetTextI18n")
         fun bind(order: OrderDto) {
-            binding.orderTitle.text = order.customerId.toString()
-            binding.orderSummary.text = order.ordSum.toString()
+            binding.orderTitle.text = order.ordDate.toString()
+            binding.orderSummary.text = "$" + order.ordSum.toString()
             binding.root.setOnClickListener { onItemClicked(order) }
         }
     }
