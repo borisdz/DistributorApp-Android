@@ -6,7 +6,7 @@ data class ArticleDto (
     val id: Long,
     val name: String,
     val manufacturer: String,
-    val quantity: Long,
+    val quantity: Int,
     val manufacturerId: Long,
     val price: BigDecimal,
     val category: String,

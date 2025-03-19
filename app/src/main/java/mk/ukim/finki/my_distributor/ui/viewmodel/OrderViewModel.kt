@@ -47,9 +47,11 @@ class OrderViewModel(
     }
 
     fun completeOrder(paymentMethod: PaymentMethod){
+        var proForma = paymentMethod != PaymentMethod.CASH
+
         val submission = OrderSubmission(
-            items = _orderItems.value ?: emptyList(),
-            paymentMethod = paymentMethod
+            orderItems = _orderItems.value ?: emptyList(),
+            proForma = proForma
         )
         viewModelScope.launch {
             val result = orderRepository.submitOrder(submission)
