@@ -40,14 +40,6 @@
         android:layout_marginTop="16dp">
 
         <Button
-            android:id="@+id/editOrderButton"
-            style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/edit_order"
-            android:layout_margin="4dp" />
-
-        <Button
             android:id="@+id/cancelOrderButton"
             style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"

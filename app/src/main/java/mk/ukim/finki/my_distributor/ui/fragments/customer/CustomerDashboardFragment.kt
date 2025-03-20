@@ -1,6 +1,5 @@
 package mk.ukim.finki.my_distributor.ui.fragments.customer
 
-import android.R.attr.order
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -84,7 +83,6 @@ class CustomerDashboardFragment : Fragment() {
         }
         binding.proFormasRecyclerView.adapter = proFormasAdapter
 
-
         viewModel.dashboardData.observe(viewLifecycleOwner) { resource ->
             when(resource) {
                 is Resource.Loading -> {
@@ -100,9 +98,7 @@ class CustomerDashboardFragment : Fragment() {
                     Toast.makeText(requireContext(), resource.message, Toast.LENGTH_SHORT).show()
                 }
             }
-
         }
-
         viewModel.loadDashboardData(1)
     }
 

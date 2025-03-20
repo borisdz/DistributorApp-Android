@@ -20,6 +20,9 @@
         <action
             android:id="@+id/action_orderReviewFragment_to_createOrderFragment"
             app:destination="@+id/createOrderFragment" />
+        <action
+            android:id="@+id/action_orderReviewFragment_to_customerDashboardFragment"
+            app:destination="@+id/customerDashboardFragment" />
     </fragment>
 
     <fragment
