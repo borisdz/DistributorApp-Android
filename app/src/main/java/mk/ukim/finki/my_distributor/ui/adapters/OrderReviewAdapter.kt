@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import mk.ukim.finki.my_distributor.databinding.ItemOrderReviewBinding
 import mk.ukim.finki.my_distributor.domain.dto.OrderItem
-import mk.ukim.finki.my_distributor.util.callbacks.OrderReviewDiffCallback
 
 class OrderReviewAdapter(
     private val onEditClicked: (OrderItem) -> Unit,
