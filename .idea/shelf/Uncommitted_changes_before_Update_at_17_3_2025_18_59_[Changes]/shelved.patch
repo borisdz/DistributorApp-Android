@@ -1,0 +1,35 @@
+Index: gradle/wrapper/gradle-wrapper.properties
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>#Sat Feb 22 12:19:27 CET 2025\r\ndistributionBase=GRADLE_USER_HOME\r\ndistributionPath=wrapper/dists\r\ndistributionUrl=https\\://services.gradle.org/distributions/gradle-8.9-bin.zip\r\nzipStoreBase=GRADLE_USER_HOME\r\nzipStorePath=wrapper/dists\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>ISO-8859-1
+===================================================================
+diff --git a/gradle/wrapper/gradle-wrapper.properties b/gradle/wrapper/gradle-wrapper.properties
+--- a/gradle/wrapper/gradle-wrapper.properties	(revision 54ea0f0aac8baca060294365b0d758b546ed6783)
++++ b/gradle/wrapper/gradle-wrapper.properties	(date 1742122410305)
+@@ -1,6 +1,6 @@
+ #Sat Feb 22 12:19:27 CET 2025
+ distributionBase=GRADLE_USER_HOME
+ distributionPath=wrapper/dists
+-distributionUrl=https\://services.gradle.org/distributions/gradle-8.9-bin.zip
++distributionUrl=https\://services.gradle.org/distributions/gradle-8.11.1-bin.zip
+ zipStoreBase=GRADLE_USER_HOME
+ zipStorePath=wrapper/dists
+Index: gradle/libs.versions.toml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>[versions]\r\nagp = \"8.7.2\"\r\njwtdecode = \"2.0.2\"\r\nkotlin = \"1.9.24\"\r\ncoreKtx = \"1.15.0\"\r\njunit = \"4.13.2\"\r\njunitVersion = \"1.2.1\"\r\nespressoCore = \"3.6.1\"\r\nappcompat = \"1.7.0\"\r\nkotlinxCoroutinesAndroid = \"1.7.3\"\r\nkotlinxCoroutinesAndroidVersion = \"1.6.4\"\r\nlifecycleViewmodelKtx = \"2.8.7\"\r\nloggingInterceptor = \"4.9.0\"\r\nmaterial = \"1.12.0\"\r\nactivity = \"1.10.0\"\r\nconstraintlayout = \"2.2.0\"\r\nretrofit = \"2.9.0\"\r\nlegacySupportV4 = \"1.0.0\"\r\nlifecycleLivedataKtx = \"2.8.7\"\r\nfragmentKtx = \"1.5.6\"\r\nroomCompiler = \"2.6.1\"\r\nroomRuntimeVersion = \"2.5.2\"\r\nsecurityCrypto = \"1.1.0-alpha06\"\r\n\r\n[libraries]\r\nandroidx-core-ktx = { group = \"androidx.core\", name = \"core-ktx\", version.ref = \"coreKtx\" }\r\nandroidx-lifecycle-viewmodel-ktx = { module = \"androidx.lifecycle:lifecycle-viewmodel-ktx\", version.ref = \"lifecycleViewmodelKtx\" }\r\nandroidx-room-compiler = { module = \"androidx.room:room-compiler\", version.ref = \"roomRuntimeVersion\" }\r\nandroidx-room-compiler-v261 = { module = \"androidx.room:room-compiler\", version.ref = \"roomCompiler\" }\r\nandroidx-room-ktx = { module = \"androidx.room:room-ktx\", version.ref = \"roomCompiler\" }\r\nandroidx-security-crypto = { module = \"androidx.security:security-crypto\", version.ref = \"securityCrypto\" }\r\nconverter-gson = { module = \"com.squareup.retrofit2:converter-gson\", version.ref = \"retrofit\" }\r\njunit = { group = \"junit\", name = \"junit\", version.ref = \"junit\" }\r\nandroidx-junit = { group = \"androidx.test.ext\", name = \"junit\", version.ref = \"junitVersion\" }\r\nandroidx-espresso-core = { group = \"androidx.test.espresso\", name = \"espresso-core\", version.ref = \"espressoCore\" }\r\nandroidx-appcompat = { group = \"androidx.appcompat\", name = \"appcompat\", version.ref = \"appcompat\" }\r\njwtdecode = { module = \"com.auth0.android:jwtdecode\", version.ref = \"jwtdecode\" }\r\nkotlinx-coroutines-android = { module = \"org.jetbrains.kotlinx:kotlinx-coroutines-android\", version.ref = \"kotlinxCoroutinesAndroid\" }\r\nkotlinx-coroutines-android-v164 = { module = \"org.jetbrains.kotlinx:kotlinx-coroutines-android\", version.ref = \"kotlinxCoroutinesAndroidVersion\" }\r\nlogging-interceptor = { module = \"com.squareup.okhttp3:logging-interceptor\", version.ref = \"loggingInterceptor\" }\r\nmaterial = { group = \"com.google.android.material\", name = \"material\", version.ref = \"material\" }\r\nandroidx-activity = { group = \"androidx.activity\", name = \"activity\", version.ref = \"activity\" }\r\nandroidx-constraintlayout = { group = \"androidx.constraintlayout\", name = \"constraintlayout\", version.ref = \"constraintlayout\" }\r\nretrofit = { module = \"com.squareup.retrofit2:retrofit\", version.ref = \"retrofit\" }\r\nandroidx-legacy-support-v4 = { group = \"androidx.legacy\", name = \"legacy-support-v4\", version.ref = \"legacySupportV4\" }\r\nandroidx-lifecycle-livedata-ktx = { group = \"androidx.lifecycle\", name = \"lifecycle-livedata-ktx\", version.ref = \"lifecycleLivedataKtx\" }\r\nandroidx-fragment-ktx = { group = \"androidx.fragment\", name = \"fragment-ktx\", version.ref = \"fragmentKtx\" }\r\nroom-runtime = { module = \"androidx.room:room-runtime\", version.ref = \"roomRuntimeVersion\" }\r\n\r\n[plugins]\r\nandroid-application = { id = \"com.android.application\", version.ref = \"agp\" }\r\nkotlin-android = { id = \"org.jetbrains.kotlin.android\", version = \"2.1.10\" }\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/gradle/libs.versions.toml b/gradle/libs.versions.toml
+--- a/gradle/libs.versions.toml	(revision 54ea0f0aac8baca060294365b0d758b546ed6783)
++++ b/gradle/libs.versions.toml	(date 1742122410296)
+@@ -1,5 +1,5 @@
+ [versions]
+-agp = "8.7.2"
++agp = "8.9.0"
+ jwtdecode = "2.0.2"
+ kotlin = "1.9.24"
+ coreKtx = "1.15.0"
