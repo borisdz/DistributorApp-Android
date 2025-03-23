@@ -133,15 +133,15 @@ class OrderReviewFragment : Fragment() {
         confirmButton.setOnClickListener {
             val quantityStr = quantityEditText.text.toString()
             val quantity = quantityStr.toIntOrNull()
-            if (quantity!=null && quantity>0) {
-                orderViewModel.updateItem(orderItem.copy(quantity=quantity))
+            if (quantity != null && quantity > 0) {
+                orderViewModel.updateItem(orderItem.copy(quantity = quantity))
                 Toast.makeText(
                     requireContext(),
                     "Updated ${orderItem.article.name} to $quantity",
                     Toast.LENGTH_SHORT
                 ).show()
                 dialog.dismiss()
-            }else{
+            } else {
                 Toast.makeText(
                     requireContext(),
                     "Please enter a valid quantity",

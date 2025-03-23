@@ -7,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import mk.ukim.finki.my_distributor.data.repository.OrderRepository
 import mk.ukim.finki.my_distributor.domain.dto.OrderDetailDto
-import mk.ukim.finki.my_distributor.domain.dto.OrderDto
 
 class OrderDetailViewModel(
     private val repository: OrderRepository
@@ -18,7 +17,7 @@ class OrderDetailViewModel(
     private val _error = MutableLiveData<String>()
     val error: LiveData<String> get() = _error
 
-    fun loadOrderDetail(orderId: Long){
+    fun loadOrderDetail(orderId: Long) {
         viewModelScope.launch {
             val result = repository.getOrder(orderId)
             result.onSuccess { detail ->

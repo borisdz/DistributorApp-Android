@@ -20,7 +20,13 @@ class LoginActivity : AppCompatActivity() {
 
     private val userPreferences by lazy { UserPreferences.getInstance(this) }
 
-    private val authRepository by lazy { AuthRepository(RetrofitClient.getAuthApiService(userPreferences)) }
+    private val authRepository by lazy {
+        AuthRepository(
+            RetrofitClient.getAuthApiService(
+                userPreferences
+            )
+        )
+    }
 
     private val viewModel: AuthViewModel by viewModels {
         AuthViewModelFactory(authRepository, userPreferences)

@@ -8,7 +8,7 @@ class OrderDetailViewModelFactory(
     private val repository: OrderRepository
 ) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if(modelClass.isAssignableFrom(OrderDetailViewModel::class.java)) {
+        if (modelClass.isAssignableFrom(OrderDetailViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
             return OrderDetailViewModel(repository) as T
         }

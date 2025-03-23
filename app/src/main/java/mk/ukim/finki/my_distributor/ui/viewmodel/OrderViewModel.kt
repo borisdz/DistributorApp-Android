@@ -33,10 +33,10 @@ class OrderViewModel(
         _orderItems.value = current
     }
 
-    fun updateItem(orderItem: OrderItem){
+    fun updateItem(orderItem: OrderItem) {
         val current = _orderItems.value?.toMutableList() ?: mutableListOf()
         val index = current.indexOfFirst { it.article.id == orderItem.article.id }
-        if(index != -1){
+        if (index != -1) {
             current[index] = orderItem
             _orderItems.value = current
         }
@@ -46,7 +46,7 @@ class OrderViewModel(
         _orderItems.value = emptyList()
     }
 
-    fun completeOrder(paymentMethod: PaymentMethod){
+    fun completeOrder(paymentMethod: PaymentMethod) {
         var proForma = paymentMethod != PaymentMethod.CASH
 
         val submission = OrderSubmission(
@@ -59,7 +59,7 @@ class OrderViewModel(
         }
     }
 
-    fun removeItem(orderItem: OrderItem){
+    fun removeItem(orderItem: OrderItem) {
         val current = _orderItems.value?.toMutableList() ?: mutableListOf()
         current.removeAll { it.article.id == orderItem.article.id }
         _orderItems.value = current

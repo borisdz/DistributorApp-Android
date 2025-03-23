@@ -13,5 +13,5 @@ fun decodeJwtToken(token: String): DecodedToken {
     val email = jwt.subject
 
     val roles = jwt.getClaim("roles").asList(String::class.java) ?: emptyList()
-    return DecodedToken(email,roles)
+    return DecodedToken(email, roles)
 }

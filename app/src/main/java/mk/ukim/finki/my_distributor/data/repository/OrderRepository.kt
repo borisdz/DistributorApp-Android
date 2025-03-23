@@ -1,13 +1,10 @@
 package mk.ukim.finki.my_distributor.data.repository
 
-import android.util.Log.e
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import mk.ukim.finki.my_distributor.data.api.service.OrderApiService
 import mk.ukim.finki.my_distributor.domain.dto.OrderDetailDto
-import mk.ukim.finki.my_distributor.domain.dto.OrderDto
 import mk.ukim.finki.my_distributor.domain.dto.OrderSubmission
-import mk.ukim.finki.my_distributor.ui.fragments.customer.OrderDetailFragment
 
 class OrderRepository(
     private val orderApiService: OrderApiService

@@ -10,11 +10,11 @@ class AuthInterceptor(private val userPreferences: UserPreferences) : Intercepto
 
         val originalRequest = chain.request()
         val builder = originalRequest.newBuilder()
-        if(!token.isNullOrEmpty()){
+        if (!token.isNullOrEmpty()) {
             builder.header("Authorization", "Bearer $token")
         }
 
-        val newRequest  = builder.build()
+        val newRequest = builder.build()
         return chain.proceed(newRequest)
     }
 }

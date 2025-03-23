@@ -9,7 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import mk.ukim.finki.my_distributor.databinding.ItemOrderDetailBinding
 import mk.ukim.finki.my_distributor.domain.dto.ArticleDto
 
-class OrderDetailItemsAdapter: ListAdapter<ArticleDto, OrderDetailItemsAdapter.OrderItemViewHolder>(ArticleDiffCallback) {
+class OrderDetailItemsAdapter :
+    ListAdapter<ArticleDto, OrderDetailItemsAdapter.OrderItemViewHolder>(ArticleDiffCallback) {
 
     inner class OrderItemViewHolder(private val binding: ItemOrderDetailBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -25,7 +26,8 @@ class OrderDetailItemsAdapter: ListAdapter<ArticleDto, OrderDetailItemsAdapter.O
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OrderItemViewHolder {
-        val binding = ItemOrderDetailBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            ItemOrderDetailBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return OrderItemViewHolder(binding)
     }
 

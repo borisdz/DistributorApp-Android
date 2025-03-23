@@ -6,7 +6,7 @@ import mk.ukim.finki.my_distributor.domain.dto.OrderItem
 class OrderReviewDiffCallback(
     private val oldList: List<OrderItem>,
     private val newList: List<OrderItem>
-) : DiffUtil.Callback(){
+) : DiffUtil.Callback() {
     override fun getOldListSize(): Int {
         return oldList.size
     }

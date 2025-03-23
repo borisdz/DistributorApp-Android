@@ -8,7 +8,7 @@ class CustomerDashboardViewModelFactory(
     private val repository: CustomerRepository
 ) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if(modelClass.isAssignableFrom(CustomerDashboardViewModel::class.java)) {
+        if (modelClass.isAssignableFrom(CustomerDashboardViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
             return CustomerDashboardViewModel(repository) as T
         }

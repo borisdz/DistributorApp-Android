@@ -27,7 +27,7 @@ class CustomerDashboardFragment : Fragment() {
 
     private var _binding: FragmentCustomerDashboardBinding? = null
     private val binding get() = _binding!!
-    
+
     private lateinit var customerRepository: CustomerRepository
 
     private val viewModel: CustomerDashboardViewModel by viewModels {
@@ -68,7 +68,7 @@ class CustomerDashboardFragment : Fragment() {
         binding.ordersRecyclerView.adapter = ordersAdapter
 
         binding.deliveriesRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-        deliveriesAdapter = DeliveriesAdapter(emptyList()){ delivery ->
+        deliveriesAdapter = DeliveriesAdapter(emptyList()) { delivery ->
             val action = CustomerDashboardFragmentDirections
                 .actionCustomerDashboardFragmentToDeliveryDetailFragment(delivery.id)
             findNavController().navigate(action)
@@ -76,7 +76,7 @@ class CustomerDashboardFragment : Fragment() {
         binding.deliveriesRecyclerView.adapter = deliveriesAdapter
 
         binding.proFormasRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-        proFormasAdapter = ProFormasAdapter(emptyList()){ proForma ->
+        proFormasAdapter = ProFormasAdapter(emptyList()) { proForma ->
             val action = CustomerDashboardFragmentDirections
                 .actionCustomerDashboardFragmentToProFormaDetailFragment(proForma.id)
             findNavController().navigate(action)
@@ -84,16 +84,18 @@ class CustomerDashboardFragment : Fragment() {
         binding.proFormasRecyclerView.adapter = proFormasAdapter
 
         viewModel.dashboardData.observe(viewLifecycleOwner) { resource ->
-            when(resource) {
+            when (resource) {
                 is Resource.Loading -> {
                     // Optionally show a loading spinner
                 }
+
                 is Resource.Success -> {
                     val data = resource.data
                     ordersAdapter.updateData(data.orders)
                     deliveriesAdapter.updateData(data.deliveries)
                     proFormasAdapter.updateData(data.proFormas)
                 }
+
                 is Resource.Error -> {
                     Toast.makeText(requireContext(), resource.message, Toast.LENGTH_SHORT).show()
                 }

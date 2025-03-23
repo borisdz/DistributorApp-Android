@@ -1,7 +1,6 @@
 package mk.ukim.finki.my_distributor.util.callbacks
 
 import androidx.recyclerview.widget.DiffUtil
-import mk.ukim.finki.my_distributor.domain.dto.ArticleDto
 import mk.ukim.finki.my_distributor.domain.dto.OrderDto
 
 class OrderDiffCallback(

@@ -37,7 +37,7 @@ class CreateOrderViewModel(
         }
     }
 
-    fun searchArticles(query: String){
+    fun searchArticles(query: String) {
         val filtered = allArticles.filter { article ->
             article.name.contains(query, ignoreCase = true)
         }

@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import mk.ukim.finki.my_distributor.databinding.ItemOrderBinding
 import mk.ukim.finki.my_distributor.domain.dto.OrderDto
-import mk.ukim.finki.my_distributor.util.callbacks.ArticleDiffCallback
 import mk.ukim.finki.my_distributor.util.callbacks.OrderDiffCallback
 
 class OrdersAdapter(

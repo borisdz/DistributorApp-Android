@@ -6,22 +6,21 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import mk.ukim.finki.my_distributor.databinding.ItemProformaBinding
 import mk.ukim.finki.my_distributor.domain.dto.ProFormaDto
-import mk.ukim.finki.my_distributor.util.callbacks.ArticleDiffCallback
 import mk.ukim.finki.my_distributor.util.callbacks.ProFormaDiffCallback
 
 class ProFormasAdapter(
     private var proFormas: List<ProFormaDto>,
     private val onItemClicked: (ProFormaDto) -> Unit
-) : RecyclerView.Adapter<ProFormasAdapter.ProFormaViewHolder>(){
+) : RecyclerView.Adapter<ProFormasAdapter.ProFormaViewHolder>() {
 
-    inner class ProFormaViewHolder(private val binding: ItemProformaBinding)
-        : RecyclerView.ViewHolder(binding.root){
-            fun bind(proForma: ProFormaDto){
-                binding.proFormaTitle.text = proForma.customerName
-                binding.proFormaSummary.text = proForma.statusName
-                binding.root.setOnClickListener { onItemClicked(proForma) }
-            }
+    inner class ProFormaViewHolder(private val binding: ItemProformaBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(proForma: ProFormaDto) {
+            binding.proFormaTitle.text = proForma.customerName
+            binding.proFormaSummary.text = proForma.statusName
+            binding.root.setOnClickListener { onItemClicked(proForma) }
         }
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProFormaViewHolder {
         val binding = ItemProformaBinding.inflate(
@@ -40,7 +39,7 @@ class ProFormasAdapter(
         return proFormas.size
     }
 
-    fun updateData(newProFormas: List<ProFormaDto>){
+    fun updateData(newProFormas: List<ProFormaDto>) {
         val diffCallback = ProFormaDiffCallback(this.proFormas, newProFormas)
         val diffResult = DiffUtil.calculateDiff(diffCallback)
         this.proFormas = newProFormas

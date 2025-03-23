@@ -1,22 +1,20 @@
 package mk.ukim.finki.my_distributor.ui.fragments.customer
 
 import android.annotation.SuppressLint
-import androidx.fragment.app.viewModels
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import mk.ukim.finki.my_distributor.data.api.RetrofitClient
 import mk.ukim.finki.my_distributor.data.local.UserPreferences
-import mk.ukim.finki.my_distributor.data.repository.ArticlesRepository
 import mk.ukim.finki.my_distributor.data.repository.OrderRepository
 import mk.ukim.finki.my_distributor.databinding.FragmentOrderDetailBinding
 import mk.ukim.finki.my_distributor.ui.adapters.OrderDetailItemsAdapter
-import mk.ukim.finki.my_distributor.ui.adapters.OrderItemsAdapter
 import mk.ukim.finki.my_distributor.ui.viewmodel.OrderDetailViewModel
 import mk.ukim.finki.my_distributor.ui.viewmodel.OrderDetailViewModelFactory
 import java.math.BigDecimal
@@ -68,10 +66,12 @@ class OrderDetailFragment : Fragment() {
                 // Update the UI for the order.
                 binding.orderDateTextView.text = "Order Date: ${it.order.ordDate}"
                 binding.orderSumTextView.text = "Order Sum: $${it.order.ordSum}"
-                binding.paymentDateTextView.text = "Payment Date: ${it.order.ordFulfillmentDate ?: "N/A"}"
+                binding.paymentDateTextView.text =
+                    "Payment Date: ${it.order.ordFulfillmentDate ?: "N/A"}"
                 binding.orderCommentTextView.text = "Comment: ${it.order.ordComment ?: "None"}"
                 binding.orderStatusTextView.text = "Status: ${it.order.oStatusId}"
-                binding.deliveryStatusTextView.text = "Delivery: ${it.order.deliveryId ?: "Not assigned"}"
+                binding.deliveryStatusTextView.text =
+                    "Delivery: ${it.order.deliveryId ?: "Not assigned"}"
                 if (it.order.deliveryId != null) {
                     val deliveryId = it.order.deliveryId
                     binding.deliveryStatusTextView.setOnClickListener {
@@ -85,10 +85,10 @@ class OrderDetailFragment : Fragment() {
 
                 // Calculate total sum of order.
                 var totalSum = BigDecimal(0);
-                for(article in it.items){
-                    totalSum+=((article.quantity).toBigDecimal()*article.price)
+                for (article in it.items) {
+                    totalSum += ((article.quantity).toBigDecimal() * article.price)
                 }
-                binding.totalSumTextView.text="Total: $${totalSum}"
+                binding.totalSumTextView.text = "Total: $${totalSum}"
 
 
             }

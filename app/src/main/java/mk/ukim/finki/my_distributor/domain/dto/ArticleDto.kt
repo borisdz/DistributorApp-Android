@@ -2,7 +2,7 @@ package mk.ukim.finki.my_distributor.domain.dto
 
 import java.math.BigDecimal
 
-data class ArticleDto (
+data class ArticleDto(
     val id: Long,
     val name: String,
     val manufacturer: String,

@@ -49,7 +49,13 @@ class CreateOrderFragment : Fragment() {
 
     private val orderViewModel: OrderViewModel by activityViewModels {
         OrderViewModelFactory(
-            OrderRepository(RetrofitClient.getOrderApiService(UserPreferences.getInstance(requireContext())))
+            OrderRepository(
+                RetrofitClient.getOrderApiService(
+                    UserPreferences.getInstance(
+                        requireContext()
+                    )
+                )
+            )
         )
     }
 
@@ -125,8 +131,8 @@ class CreateOrderFragment : Fragment() {
         confirmButton.setOnClickListener {
             val quantityStr = quantityEditText.text.toString()
             val quantity = quantityStr.toIntOrNull()
-            if (quantity != null && quantity > 0){
-                orderViewModel.addItem(OrderItem(article,quantity))
+            if (quantity != null && quantity > 0) {
+                orderViewModel.addItem(OrderItem(article, quantity))
                 Toast.makeText(
                     requireContext(),
                     "Added ${article.name} x $quantity",
