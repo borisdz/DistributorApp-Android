@@ -9,36 +9,53 @@
 
     <EditText
         android:id="@+id/emailEditText"
+        style="@style/ChunkyEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="48dp"
-        android:autofillHints=""
+        android:layout_marginHorizontal="48dp"
+        android:autofillHints="Email"
+        android:background="@drawable/edit_text_border"
         android:hint="@string/emailLabel"
         android:inputType="textEmailAddress"
+        app:layout_constraintBottom_toTopOf="@+id/passwordEditText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
 
     <EditText
         android:id="@+id/passwordEditText"
+        style="@style/ChunkyEditText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="48dp"
+        android:layout_marginTop="16dp"
         android:autofillHints=""
+        android:background="@drawable/edit_text_border"
         android:hint="@string/passwordLabel"
         android:inputType="textPassword"
-        app:layout_constraintTop_toBottomOf="@id/emailEditText"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/loginButton"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="40dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/emailEditText" />
 
     <Button
         android:id="@+id/loginButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="48dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/loginLabel"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/passwordEditText" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/chainGuide"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/loginLabel"
-        app:layout_constraintTop_toBottomOf="@id/passwordEditText"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="40dp" />
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

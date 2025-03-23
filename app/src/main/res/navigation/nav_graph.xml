@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/customerDashboardFragment">
+
+    <fragment
+        android:id="@+id/createOrderFragment"
+        android:name="mk.ukim.finki.my_distributor.ui.fragments.customer.CreateOrderFragment"
+        android:label="Create Order">
+        <action
+            android:id="@+id/action_createOrderFragment_to_orderReviewFragment"
+            app:destination="@id/orderReviewFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/orderReviewFragment"
+        android:name="mk.ukim.finki.my_distributor.ui.fragments.customer.OrderReviewFragment"
+        android:label="Order Review">
+        <action
+            android:id="@+id/action_orderReviewFragment_to_createOrderFragment"
+            app:destination="@+id/createOrderFragment" />
+        <action
+            android:id="@+id/action_orderReviewFragment_to_customerDashboardFragment"
+            app:destination="@+id/customerDashboardFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="mk.ukim.finki.my_distributor.ui.fragments.customer.ProfileFragment"
+        android:label="Profile"/>
+
+    <fragment
+        android:id="@+id/customerDashboardFragment"
+        android:name="mk.ukim.finki.my_distributor.ui.fragments.customer.CustomerDashboardFragment"
+        android:label="Dashboard">
+        <action
+            android:id="@+id/action_customerDashboardFragment_to_orderDetailFragment"
+            app:destination="@+id/orderDetailFragment"/>
+        <action
+            android:id="@+id/action_customerDashboardFragment_to_deliveryDetailFragment"
+            app:destination="@+id/deliveryDetailFragment"/>
+        <action
+            android:id="@+id/action_customerDashboardFragment_to_proFormaDetailFragment"
+            app:destination="@+id/proFormaDetailFragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/orderDetailFragment"
+        android:name="mk.ukim.finki.my_distributor.ui.fragments.customer.OrderDetailFragment"
+        android:label="Order Details">
+        <argument
+            android:name="orderId"
+            app:argType="long" />
+        <action
+            android:id="@+id/action_orderDetailFragment_to_deliveryDetailFragment"
+            app:destination="@+id/deliveryDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/deliveryDetailFragment"
+        android:name="mk.ukim.finki.my_distributor.ui.fragments.customer.DeliveryDetailFragment"
+        android:label="Delivery Details">
+        <argument
+            android:name="deliveryId"
+            app:argType="long" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/proFormaDetailFragment"
+        android:name="mk.ukim.finki.my_distributor.ui.fragments.customer.ProFormaDetailFragment"
+        android:label="ProForma Details">
+        <argument
+            android:name="proFormaId"
+            app:argType="long" />
+    </fragment>
+</navigation>
