@@ -33,4 +33,16 @@
     <string name="cash">Cash</string>
     <string name="edit_item">Edit item</string>
     <string name="delete_item">Delete Item</string>
+    <string name="order_summary">Order Summary</string>
+    <string name="total_sum">Total: $0.00</string>
+    <string name="order_details">Order Details</string>
+    <string name="order_id">Order ID:</string>
+    <string name="comment">Comment:</string>
+    <string name="order_status">Order Status:</string>
+    <string name="payment_date">Payment Date:</string>
+    <string name="order_sum">Order Sum:</string>
+    <string name="order_date">Order Date:</string>
+    <string name="delivery">Delivery:</string>
+    <string name="generate_pro_forma">Generate Pro Forma</string>
+    <string name="manufacturer_name">Manufacturer Name</string>
 </resources>

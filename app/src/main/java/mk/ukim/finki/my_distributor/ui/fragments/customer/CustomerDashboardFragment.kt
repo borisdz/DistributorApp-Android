@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.gson.Gson
 import mk.ukim.finki.my_distributor.data.api.RetrofitClient
@@ -59,23 +60,28 @@ class CustomerDashboardFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.ordersRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-        ordersAdapter = OrdersAdapter(emptyList()) {
-            // Handle order click - navigate to details.
+        ordersAdapter = OrdersAdapter(emptyList()) { order ->
+            val action = CustomerDashboardFragmentDirections
+                .actionCustomerDashboardFragmentToOrderDetailFragment(order.id)
+            findNavController().navigate(action)
         }
         binding.ordersRecyclerView.adapter = ordersAdapter
 
         binding.deliveriesRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-        deliveriesAdapter = DeliveriesAdapter(emptyList()){
-            // Handle delivery click - navigate to details.
+        deliveriesAdapter = DeliveriesAdapter(emptyList()){ delivery ->
+            val action = CustomerDashboardFragmentDirections
+                .actionCustomerDashboardFragmentToDeliveryDetailFragment(delivery.id)
+            findNavController().navigate(action)
         }
         binding.deliveriesRecyclerView.adapter = deliveriesAdapter
 
         binding.proFormasRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-        proFormasAdapter = ProFormasAdapter(emptyList()){
-            // Handle proForma click - navigate to details
+        proFormasAdapter = ProFormasAdapter(emptyList()){ proForma ->
+            val action = CustomerDashboardFragmentDirections
+                .actionCustomerDashboardFragmentToProFormaDetailFragment(proForma.id)
+            findNavController().navigate(action)
         }
         binding.proFormasRecyclerView.adapter = proFormasAdapter
-
 
         viewModel.dashboardData.observe(viewLifecycleOwner) { resource ->
             when(resource) {
@@ -92,9 +98,7 @@ class CustomerDashboardFragment : Fragment() {
                     Toast.makeText(requireContext(), resource.message, Toast.LENGTH_SHORT).show()
                 }
             }
-
         }
-
         viewModel.loadDashboardData(1)
     }
 

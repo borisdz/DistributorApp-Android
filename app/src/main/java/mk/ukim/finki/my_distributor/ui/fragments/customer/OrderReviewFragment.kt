@@ -70,17 +70,11 @@ class OrderReviewFragment : Fragment() {
             orderReviewAdapter.submitList(orderItems.toList())
         }
 
-        binding.editOrderButton.setOnClickListener {
-            Toast.makeText(
-                requireContext(),
-                "Edit Order clicked",
-                Toast.LENGTH_SHORT
-            ).show()
-            findNavController().navigate(R.id.action_orderReviewFragment_to_createOrderFragment)
-        }
-
         binding.cancelOrderButton.setOnClickListener {
             orderViewModel.clearOrder()
+            val action = OrderReviewFragmentDirections
+                .actionOrderReviewFragmentToCustomerDashboardFragment()
+            findNavController().navigate(action)
             Toast.makeText(
                 requireContext(),
                 "Order cancelled",
@@ -97,12 +91,20 @@ class OrderReviewFragment : Fragment() {
             orderViewModel.completeOrder(paymentMethod)
             orderViewModel.orderSubmissionResult.observe(viewLifecycleOwner) { result ->
                 result.onSuccess {
+                    orderViewModel.clearOrder()
+                    val action = OrderReviewFragmentDirections
+                        .actionOrderReviewFragmentToCustomerDashboardFragment()
+                    findNavController().navigate(action)
                     Toast.makeText(
                         requireContext(),
                         "Order completed successfully",
                         Toast.LENGTH_LONG
                     ).show()
                 }.onFailure { exception ->
+                    orderViewModel.clearOrder()
+                    val action = OrderReviewFragmentDirections
+                        .actionOrderReviewFragmentToCustomerDashboardFragment()
+                    findNavController().navigate(action)
                     Toast.makeText(
                         requireContext(),
                         "Order completion failed: ${exception.message}",
