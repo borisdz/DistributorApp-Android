@@ -19,6 +19,7 @@ import mk.ukim.finki.my_distributor.ui.adapters.OrderDetailItemsAdapter
 import mk.ukim.finki.my_distributor.ui.adapters.OrderItemsAdapter
 import mk.ukim.finki.my_distributor.ui.viewmodel.OrderDetailViewModel
 import mk.ukim.finki.my_distributor.ui.viewmodel.OrderDetailViewModelFactory
+import java.math.BigDecimal
 
 class OrderDetailFragment : Fragment() {
 
@@ -81,6 +82,15 @@ class OrderDetailFragment : Fragment() {
                 }
                 // Populate the RecyclerView with order items.
                 orderItemsAdapter.submitList(it.items)
+
+                // Calculate total sum of order.
+                var totalSum = BigDecimal(0);
+                for(article in it.items){
+                    totalSum+=((article.quantity).toBigDecimal()*article.price)
+                }
+                binding.totalSumTextView.text="Total: $${totalSum}"
+
+
             }
         }
 
