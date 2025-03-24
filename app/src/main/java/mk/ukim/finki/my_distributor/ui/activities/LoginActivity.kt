@@ -65,7 +65,7 @@ class LoginActivity : AppCompatActivity() {
                         finish()
                     }
 
-                    decoded.roles.contains("DRIVER") -> {
+                    decoded.roles.contains("ROLE_DRIVER") -> {
                         val intent = Intent(this, DriverActivity::class.java)
                         startActivity(intent)
                         finish()

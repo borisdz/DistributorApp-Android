@@ -6,6 +6,7 @@ import com.google.gson.GsonBuilder
 import mk.ukim.finki.my_distributor.data.api.service.ArticleApiService
 import mk.ukim.finki.my_distributor.data.api.service.AuthApiService
 import mk.ukim.finki.my_distributor.data.api.service.DashboardApiService
+import mk.ukim.finki.my_distributor.data.api.service.DeliveryApiService
 import mk.ukim.finki.my_distributor.data.api.service.OrderApiService
 import mk.ukim.finki.my_distributor.data.api.service.UserApiService
 import mk.ukim.finki.my_distributor.data.local.UserPreferences
@@ -64,5 +65,9 @@ object RetrofitClient {
 
     fun getOrderApiService(userPreferences: UserPreferences): OrderApiService {
         return getRetrofit(userPreferences).create(OrderApiService::class.java)
+    }
+
+    fun getDeliveryApiService(userPreferences: UserPreferences): DeliveryApiService {
+        return getRetrofit(userPreferences).create(DeliveryApiService::class.java)
     }
 }

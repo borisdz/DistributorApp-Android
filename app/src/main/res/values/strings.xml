@@ -45,4 +45,8 @@
     <string name="delivery">Delivery:</string>
     <string name="generate_pro_forma">Generate Pro Forma</string>
     <string name="manufacturer_name">Manufacturer Name</string>
+    <string name="delivery_date">Delivery Date:</string>
+    <string name="status">Status:</string>
+    <string name="route_info">Route Info</string>
+    <string name="assigned_deliveries">Assigned Deliveries</string>
 </resources>

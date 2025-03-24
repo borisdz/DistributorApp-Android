@@ -5,6 +5,18 @@
     app:startDestination="@id/customerDashboardFragment">
 
     <fragment
+        android:id="@+id/driverDashboardFragment"
+        android:name="mk.ukim.finki.my_distributor.ui.fragments.driver.DriverDashboardFragment"
+        android:label="Driver Dashboard">
+        <argument
+            android:name="deliveryId"
+            app:argType="long" />
+        <action
+            android:id="@+id/action_driverDashboardFragment_to_deliveryDetailFragment"
+            app:destination="@id/deliveryDetailFragment" />
+    </fragment>
+
+    <fragment
         android:id="@+id/createOrderFragment"
         android:name="mk.ukim.finki.my_distributor.ui.fragments.customer.CreateOrderFragment"
         android:label="Create Order">
@@ -28,7 +40,7 @@
     <fragment
         android:id="@+id/profileFragment"
         android:name="mk.ukim.finki.my_distributor.ui.fragments.customer.ProfileFragment"
-        android:label="Profile"/>
+        android:label="Profile" />
 
     <fragment
         android:id="@+id/customerDashboardFragment"
@@ -36,13 +48,13 @@
         android:label="Dashboard">
         <action
             android:id="@+id/action_customerDashboardFragment_to_orderDetailFragment"
-            app:destination="@+id/orderDetailFragment"/>
+            app:destination="@+id/orderDetailFragment" />
         <action
             android:id="@+id/action_customerDashboardFragment_to_deliveryDetailFragment"
-            app:destination="@+id/deliveryDetailFragment"/>
+            app:destination="@+id/deliveryDetailFragment" />
         <action
             android:id="@+id/action_customerDashboardFragment_to_proFormaDetailFragment"
-            app:destination="@+id/proFormaDetailFragment"/>
+            app:destination="@+id/proFormaDetailFragment" />
     </fragment>
 
     <fragment
