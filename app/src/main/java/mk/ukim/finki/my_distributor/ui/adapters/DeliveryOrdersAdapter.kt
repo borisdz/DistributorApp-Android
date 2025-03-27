@@ -3,34 +3,42 @@ package mk.ukim.finki.my_distributor.ui.adapters
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import mk.ukim.finki.my_distributor.databinding.ItemOrderDetailBinding
 import mk.ukim.finki.my_distributor.domain.dto.ArticleDto
+import mk.ukim.finki.my_distributor.domain.dto.OrderDto
 
-class DeliveryOrdersAdapter(
-    private val onItemClicked: (ArticleDto) -> Unit
-) : ListAdapter<ArticleDto, DeliveryOrdersAdapter.DeliveryOrderViewHolder>(ArticleDiffCallback) {
+object OrderDtoDiffCallback : DiffUtil.ItemCallback<OrderDto>() {
+    override fun areItemsTheSame(oldItem: OrderDto, newItem: OrderDto): Boolean {
+        return oldItem.id == newItem.id
+    }
 
-    inner class DeliveryOrderViewHolder(private val binding: ItemOrderDetailBinding)
-        : RecyclerView.ViewHolder(binding.root){
+    override fun areContentsTheSame(oldItem: OrderDto, newItem: OrderDto): Boolean {
+        return oldItem == newItem
+    }
+}
+
+class DeliveryOrdersAdapter : ListAdapter<OrderDto, DeliveryOrdersAdapter.OrderViewHolder>(OrderDtoDiffCallback) {
+
+    inner class OrderViewHolder(private val binding: ItemOrderDetailBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("SetTextI18n")
-        fun bind(article: ArticleDto){
-            binding.articleNameTextView.text = article.name
-            binding.articleQuantityTextView.text = "Qty: ${article.quantity}"
-            binding.unitPriceTextView.text = "Unit: $${article.price}"
-            val totalPrice = article.price.toDouble() * article.quantity
-            binding.totalPriceTextView.text = "Total: $${"%.2f".format(totalPrice)}"
-            binding.root.setOnClickListener { onItemClicked(article) }
+        fun bind(order: OrderDto) {
+            binding.articleNameTextView.text = "Order #${order.id}"
+            binding.articleQuantityTextView.text = "Qty: [N/A]"
+            binding.unitPriceTextView.text = "Unit: $${order.ordSum}"
+            binding.totalPriceTextView.text = "Total: $${order.ordSum}"
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DeliveryOrderViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OrderViewHolder {
         val binding = ItemOrderDetailBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return DeliveryOrderViewHolder(binding)
+        return OrderViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: DeliveryOrderViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: OrderViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
 }

@@ -8,15 +8,36 @@ import mk.ukim.finki.my_distributor.domain.dto.DeliveryDto
 import mk.ukim.finki.my_distributor.domain.dto.DeliveryWithOrdersDto
 
 class DeliveryRepository(
-    private val dashboardApiService: DeliveryApiService
+    private val apiService: DeliveryApiService
 ) {
-    suspend fun getDriverDeliveries(): Result<List<DeliveryWithOrdersDto>> {
+
+    suspend fun getDriverDeliveries(): Result<List<DeliveryDto>> {
         return withContext(Dispatchers.IO) {
             try {
-                val response = dashboardApiService.getDriverNewDeliveries()
+                val response = apiService.getDriverNewDeliveries()
                 if (response.isSuccessful) {
                     val deliveries = response.body() ?: emptyList()
                     Result.success(deliveries)
+                } else {
+                    Result.failure(Exception("Error: ${response.code()} ${response.message()}"))
+                }
+            } catch (ex: Exception) {
+                Result.failure(ex)
+            }
+        }
+    }
+
+    suspend fun getDeliveryWithOrders(deliveryId: Long): Result<DeliveryWithOrdersDto> {
+        return withContext(Dispatchers.IO) {
+            try {
+                val response = apiService.getDeliveryWithOrders(deliveryId)
+                if (response.isSuccessful) {
+                    val dto = response.body()
+                    if (dto != null) {
+                        Result.success(dto)
+                    } else {
+                        Result.failure(Exception("No delivery data found"))
+                    }
                 } else {
                     Result.failure(Exception("Error: ${response.code()} ${response.message()}"))
                 }
