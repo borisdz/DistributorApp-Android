@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/driver_nav_graph"
+    app:startDestination="@id/driverDashboardFragment">
+
+    <fragment
+        android:id="@+id/driverDashboardFragment"
+        android:name="mk.ukim.finki.my_distributor.ui.fragments.driver.DriverDashboardFragment"
+        android:label="Driver Dashboard">
+    </fragment>
+
+    <fragment
+        android:id="@+id/startDeliveryFragment"
+        android:name="mk.ukim.finki.my_distributor.ui.fragments.driver.StartDeliveryFragment"
+        android:label="Start Delivery">
+    </fragment>
+
+    <fragment
+        android:id="@+id/driverProfileFragment"
+        android:name="mk.ukim.finki.my_distributor.ui.fragments.driver.DriverProfileFragment"
+        android:label="Profile">
+    </fragment>
+</navigation>

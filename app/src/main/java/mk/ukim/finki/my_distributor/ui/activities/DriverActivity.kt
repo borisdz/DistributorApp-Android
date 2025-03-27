@@ -7,6 +7,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
 import mk.ukim.finki.my_distributor.R
 import mk.ukim.finki.my_distributor.databinding.ActivityDriverBinding
 
@@ -21,11 +22,13 @@ class DriverActivity : AppCompatActivity() {
         binding = ActivityDriverBinding.inflate(layoutInflater)
 
         enableEdgeToEdge()
-        setContentView(R.layout.activity_driver)
+        setContentView(binding.root)
 
         val navHostFragment = supportFragmentManager
             .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
+
+        binding.bottomNavigation.setupWithNavController(navController)
 
     }
 

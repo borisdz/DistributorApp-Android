@@ -39,7 +39,7 @@
 
     <fragment
         android:id="@+id/profileFragment"
-        android:name="mk.ukim.finki.my_distributor.ui.fragments.customer.ProfileFragment"
+        android:name="mk.ukim.finki.my_distributor.ui.fragments.customer.CustomerProfileFragment"
         android:label="Profile" />
 
     <fragment

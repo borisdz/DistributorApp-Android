@@ -5,11 +5,12 @@ import kotlinx.coroutines.withContext
 import mk.ukim.finki.my_distributor.data.api.service.DashboardApiService
 import mk.ukim.finki.my_distributor.data.api.service.DeliveryApiService
 import mk.ukim.finki.my_distributor.domain.dto.DeliveryDto
+import mk.ukim.finki.my_distributor.domain.dto.DeliveryWithOrdersDto
 
 class DeliveryRepository(
     private val dashboardApiService: DeliveryApiService
 ) {
-    suspend fun getDriverDeliveries(): Result<List<DeliveryDto>> {
+    suspend fun getDriverDeliveries(): Result<List<DeliveryWithOrdersDto>> {
         return withContext(Dispatchers.IO) {
             try {
                 val response = dashboardApiService.getDriverNewDeliveries()
