@@ -3,6 +3,7 @@ package mk.ukim.finki.my_distributor.data.local
 import android.content.Context
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
+import androidx.core.content.edit
 
 class UserPreferences(context: Context) {
 
@@ -19,7 +20,7 @@ class UserPreferences(context: Context) {
     )
 
     fun saveToken(token: String) {
-        sharedPreferences.edit().putString("jwt_token", token).apply()
+        sharedPreferences.edit() { putString("jwt_token", token) }
     }
 
     fun getToken(): String? {
