@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context=".ui.activities.CustomerActivity">
 
     <com.google.android.material.appbar.MaterialToolbar
@@ -23,8 +24,8 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:defaultNavHost="true"
-        app:layout_constraintTop_toBottomOf="@id/topAppBar"
         app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
+        app:layout_constraintTop_toBottomOf="@id/topAppBar"
         app:navGraph="@navigation/customer_nav_graph" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
