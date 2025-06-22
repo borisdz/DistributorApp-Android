@@ -37,7 +37,6 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         binding = ActivityLoginBinding.inflate(layoutInflater)
-        enableEdgeToEdge()
         setContentView(binding.root)
 
         viewModel.loginResponse.observe(this) {
@@ -65,7 +64,7 @@ class LoginActivity : AppCompatActivity() {
                         finish()
                     }
 
-                    decoded.roles.contains("DRIVER") -> {
+                    decoded.roles.contains("ROLE_DRIVER") -> {
                         val intent = Intent(this, DriverActivity::class.java)
                         startActivity(intent)
                         finish()

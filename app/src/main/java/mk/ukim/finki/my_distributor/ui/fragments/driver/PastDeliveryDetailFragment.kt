@@ -1,4 +1,4 @@
-package mk.ukim.finki.my_distributor.ui.fragments.customer
+package mk.ukim.finki.my_distributor.ui.fragments.driver
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,15 +7,15 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import mk.ukim.finki.my_distributor.R
-import mk.ukim.finki.my_distributor.ui.viewmodel.ProfileViewModel
+import mk.ukim.finki.my_distributor.ui.viewmodel.PastDeliveryDetailViewModel
 
-class ProfileFragment : Fragment() {
+class PastDeliveryDetailFragment : Fragment() {
 
     companion object {
-        fun newInstance() = ProfileFragment()
+        fun newInstance() = PastDeliveryDetailFragment()
     }
 
-    private val viewModel: ProfileViewModel by viewModels()
+    private val viewModel: PastDeliveryDetailViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,6 +27,6 @@ class ProfileFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return inflater.inflate(R.layout.fragment_profile, container, false)
+        return inflater.inflate(R.layout.fragment_past_delivery_detail, container, false)
     }
 }

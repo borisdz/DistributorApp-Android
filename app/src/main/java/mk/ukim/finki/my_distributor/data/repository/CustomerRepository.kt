@@ -19,7 +19,7 @@ class CustomerRepository(
 
         return withContext(Dispatchers.IO) {
             try {
-                val response = dashboardApiService.getDashboardData(customerId)
+                val response = dashboardApiService.getCustomerDashboardData(customerId)
                 if (response.isSuccessful) {
                     val data = response.body()
                     if (data != null) {

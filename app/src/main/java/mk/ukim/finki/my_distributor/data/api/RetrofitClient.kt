@@ -6,6 +6,7 @@ import com.google.gson.GsonBuilder
 import mk.ukim.finki.my_distributor.data.api.service.ArticleApiService
 import mk.ukim.finki.my_distributor.data.api.service.AuthApiService
 import mk.ukim.finki.my_distributor.data.api.service.DashboardApiService
+import mk.ukim.finki.my_distributor.data.api.service.DeliveryApiService
 import mk.ukim.finki.my_distributor.data.api.service.OrderApiService
 import mk.ukim.finki.my_distributor.data.api.service.UserApiService
 import mk.ukim.finki.my_distributor.data.local.UserPreferences
@@ -18,7 +19,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.time.LocalDateTime
 
 object RetrofitClient {
-    private const val BASE_URL = "https://192.168.31.100:8443/"
+    private const val BASE_URL = "https://10.0.2.2:8443/"
+    //    private const val BASE_URL = "https://192.168.31.100:8443/"
+    //    private const val BASE_URL = "https://192.168.236.211:8443/"
 
     @SuppressLint("NewApi")
     val customGson: Gson = GsonBuilder()
@@ -64,5 +67,9 @@ object RetrofitClient {
 
     fun getOrderApiService(userPreferences: UserPreferences): OrderApiService {
         return getRetrofit(userPreferences).create(OrderApiService::class.java)
+    }
+
+    fun getDeliveryApiService(userPreferences: UserPreferences): DeliveryApiService {
+        return getRetrofit(userPreferences).create(DeliveryApiService::class.java)
     }
 }

@@ -18,7 +18,6 @@ class CustomerActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         binding = ActivityCustomerBinding.inflate(layoutInflater)
-        enableEdgeToEdge()
         setContentView(binding.root)
 
         val navHostFragment = supportFragmentManager

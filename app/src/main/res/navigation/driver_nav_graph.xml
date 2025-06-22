@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/driver_nav_graph"
+    app:startDestination="@id/driverDashboardFragment">
+
+    <!-- 1. Dashboard: New Deliveries -->
+    <fragment
+        android:id="@+id/driverDashboardFragment"
+        android:name="mk.ukim.finki.my_distributor.ui.fragments.driver.DriverDashboardFragment"
+        android:label="Dashboard">
+        <!-- Navigate from Dashboard → Delivery Detail -->
+        <action
+            android:id="@+id/action_driverDashboardFragment_to_deliveryDetailFragment"
+            app:destination="@id/deliveryDetailFragment" />
+    </fragment>
+
+    <!-- 2. Delivery Detail: Orders/Stops before starting -->
+    <fragment
+        android:id="@+id/deliveryDetailFragment"
+        android:name="mk.ukim.finki.my_distributor.ui.fragments.driver.DeliveryDetailFragment"
+        android:label="Delivery Detail">
+        <!-- Argument: which delivery to show -->
+        <argument
+            android:name="deliveryId"
+            app:argType="long" />
+        <!-- From Detail → Start Delivery -->
+        <action
+            android:id="@+id/action_deliveryDetailFragment_to_startDeliveryFragment"
+            app:destination="@id/startDeliveryFragment" />
+    </fragment>
+
+    <!-- 3. Start Delivery: reorder + enter start KM + begin navigation -->
+    <fragment
+        android:id="@+id/startDeliveryFragment"
+        android:name="mk.ukim.finki.my_distributor.ui.fragments.driver.StartDeliveryFragment"
+        android:label="Start Delivery">
+        <argument
+            android:name="deliveryId"
+            app:argType="long" />
+        <!-- (No further actions here; navigation back/up handled by NavController) -->
+    </fragment>
+
+    <!-- 4. Past Deliveries: list of completed deliveries -->
+    <fragment
+        android:id="@+id/pastDeliveriesFragment"
+        android:name="mk.ukim.finki.my_distributor.ui.fragments.driver.PastDeliveriesFragment"
+        android:label="Past Deliveries">
+        <!-- From Past Deliveries → Past Delivery Detail -->
+        <action
+            android:id="@+id/action_pastDeliveriesFragment_to_pastDeliveryDetailFragment"
+            app:destination="@id/pastDeliveryDetailFragment" />
+    </fragment>
+
+    <!-- 5. Past Delivery Detail: view orders + route of a completed delivery -->
+    <fragment
+        android:id="@+id/pastDeliveryDetailFragment"
+        android:name="mk.ukim.finki.my_distributor.ui.fragments.driver.PastDeliveryDetailFragment"
+        android:label="Past Delivery Detail">
+        <argument
+            android:name="deliveryId"
+            app:argType="long" />
+    </fragment>
+
+    <!-- 6. Profile: driver profile, settings, logout -->
+    <fragment
+        android:id="@+id/driverProfileFragment"
+        android:name="mk.ukim.finki.my_distributor.ui.fragments.driver.DriverProfileFragment"
+        android:label="Profile" >
+
+        <!-- add this: Profile → Past Deliveries -->
+        <action
+            android:id="@+id/action_driverProfileFragment_to_pastDeliveriesFragment"
+            app:destination="@id/pastDeliveriesFragment" />
+    </fragment>
+</navigation>

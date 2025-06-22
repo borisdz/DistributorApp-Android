@@ -5,5 +5,5 @@ plugins {
 
     id("com.google.devtools.ksp") version "2.1.10-1.0.31" apply false
 
-    id("androidx.navigation.safeargs.kotlin") version "2.7.3" apply false
+    id("androidx.navigation.safeargs.kotlin") version "2.9.0" apply false
 }

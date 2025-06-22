@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:fitsSystemWindows="true">
 
     <!-- Order Items RecyclerView -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/orderItemsRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"/>
+        android:layout_weight="1" />
 
     <RadioGroup
         android:id="@+id/paymentRadioGroup"
@@ -19,16 +19,18 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginTop="16dp">
+
         <RadioButton
             android:id="@+id/radioProForma"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/pro_forma"/>
+            android:text="@string/pro_forma" />
+
         <RadioButton
             android:id="@+id/radioCash"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/cash"/>
+            android:text="@string/cash" />
     </RadioGroup>
 
     <LinearLayout
@@ -53,7 +55,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/complete_order"
-            android:layout_margin="4dp"/>
+            android:layout_margin="4dp" />
 
     </LinearLayout>
 </LinearLayout>

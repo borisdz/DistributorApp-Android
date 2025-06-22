@@ -3,10 +3,23 @@ package mk.ukim.finki.my_distributor.ui.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import mk.ukim.finki.my_distributor.data.repository.ArticlesRepository
 import mk.ukim.finki.my_distributor.domain.dto.ArticleDto
+
+class CreateOrderViewModelFactory(
+    private val articlesRepository: ArticlesRepository
+) : ViewModelProvider.Factory {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        if (modelClass.isAssignableFrom(CreateOrderViewModel::class.java)) {
+            @Suppress("UNCHECKED_CAST")
+            return CreateOrderViewModel(articlesRepository) as T
+        }
+        throw IllegalArgumentException("Unknown ViewModel class")
+    }
+}
 
 class CreateOrderViewModel(
     private val articlesRepository: ArticlesRepository

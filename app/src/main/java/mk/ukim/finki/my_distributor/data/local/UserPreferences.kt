@@ -1,6 +1,7 @@
 package mk.ukim.finki.my_distributor.data.local
 
 import android.content.Context
+import androidx.core.content.edit
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
 
@@ -19,7 +20,7 @@ class UserPreferences(context: Context) {
     )
 
     fun saveToken(token: String) {
-        sharedPreferences.edit().putString("jwt_token", token).apply()
+        sharedPreferences.edit() { putString("jwt_token", token) }
     }
 
     fun getToken(): String? {
@@ -27,7 +28,29 @@ class UserPreferences(context: Context) {
     }
 
     fun clearToken() {
-        sharedPreferences.edit().remove("jwt_token").apply()
+        sharedPreferences.edit() { remove("jwt_token") }
+    }
+
+    fun saveUserInfo(name: String, email: String) {
+        sharedPreferences.edit {
+            putString("userName", name)
+            putString("userEmail", email)
+        }
+    }
+
+    fun getUserInfo(): UserInfo? {
+        val name = sharedPreferences.getString("userName", null)
+        val email = sharedPreferences.getString("userEmail", null)
+        return if (name != null && email != null) {
+            UserInfo(name, email)
+        } else null
+    }
+
+    fun clearUserInfo() {
+        sharedPreferences.edit {
+            remove("userName")
+            remove("userEmail")
+        }
     }
 
     companion object {
@@ -42,4 +65,7 @@ class UserPreferences(context: Context) {
             }
         }
     }
+
+    data class UserInfo(val name: String, val email: String)
+
 }

@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/orderDetailScrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:fitsSystemWindows="true">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -68,31 +67,31 @@
                 android:id="@+id/orderDateTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/order_date"/>
+                android:text="@string/order_date" />
 
             <TextView
                 android:id="@+id/orderSumTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/order_sum"/>
+                android:text="@string/order_sum" />
 
             <TextView
                 android:id="@+id/paymentDateTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/payment_date"/>
+                android:text="@string/payment_date" />
 
             <TextView
                 android:id="@+id/orderCommentTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/comment"/>
+                android:text="@string/comment" />
 
             <TextView
                 android:id="@+id/orderStatusTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/order_status"/>
+                android:text="@string/order_status" />
 
             <TextView
                 android:id="@+id/deliveryStatusTextView"
@@ -124,7 +123,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/cancel_order"
-                android:layout_margin="4dp"/>
+                android:layout_margin="4dp" />
 
         </LinearLayout>
 

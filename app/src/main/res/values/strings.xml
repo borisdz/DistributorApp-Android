@@ -45,4 +45,16 @@
     <string name="delivery">Delivery:</string>
     <string name="generate_pro_forma">Generate Pro Forma</string>
     <string name="manufacturer_name">Manufacturer Name</string>
+    <string name="delivery_date">Delivery Date:</string>
+    <string name="status">Status:</string>
+    <string name="route_info">Route Info</string>
+    <string name="assigned_deliveries">Assigned Deliveries</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="create_order">Create Order</string>
+    <string name="profile">Profile</string>
+    <string name="start_a_delivery">Delivery</string>
+    <string name="start_km">Start KM:</string>
+    <string name="enter_starting_km">Enter starting KM</string>
+    <string name="start_delivery">Start Delivery</string>
+    <string name="past_deliveries">Past Deliveries</string>
 </resources>
