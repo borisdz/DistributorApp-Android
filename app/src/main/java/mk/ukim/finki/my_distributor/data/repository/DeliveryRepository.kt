@@ -2,16 +2,15 @@ package mk.ukim.finki.my_distributor.data.repository
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import mk.ukim.finki.my_distributor.data.api.service.DashboardApiService
 import mk.ukim.finki.my_distributor.data.api.service.DeliveryApiService
-import mk.ukim.finki.my_distributor.domain.dto.DeliveryDto
+import mk.ukim.finki.my_distributor.domain.dto.DeliverySimpleDto
 import mk.ukim.finki.my_distributor.domain.dto.DeliveryWithOrdersDto
 
 class DeliveryRepository(
     private val apiService: DeliveryApiService
 ) {
 
-    suspend fun getDriverDeliveries(): Result<List<DeliveryDto>> {
+    suspend fun getDriverDeliveries(): Result<List<DeliverySimpleDto>> {
         return withContext(Dispatchers.IO) {
             try {
                 val response = apiService.getDriverNewDeliveries()
@@ -27,23 +26,18 @@ class DeliveryRepository(
         }
     }
 
-    suspend fun getDeliveryWithOrders(deliveryId: Long): Result<DeliveryWithOrdersDto> {
-        return withContext(Dispatchers.IO) {
+    suspend fun getDeliveryWithOrders(deliveryId: Long): Result<DeliveryWithOrdersDto> =
+        withContext(Dispatchers.IO) {
             try {
-                val response = apiService.getDeliveryWithOrders(deliveryId)
-                if (response.isSuccessful) {
-                    val dto = response.body()
-                    if (dto != null) {
-                        Result.success(dto)
-                    } else {
-                        Result.failure(Exception("No delivery data found"))
-                    }
+                val resp = apiService.getDeliveryWithOrders(deliveryId)
+                if (resp.isSuccessful) {
+                    resp.body()?.let { Result.success(it) }
+                        ?: Result.failure(Exception("Empty delivery data"))
                 } else {
-                    Result.failure(Exception("Error: ${response.code()} ${response.message()}"))
+                    Result.failure(Exception("Error ${resp.code()}: ${resp.message()}"))
                 }
-            } catch (ex: Exception) {
-                Result.failure(ex)
+            } catch (e: Exception) {
+                Result.failure(e)
             }
         }
-    }
 }

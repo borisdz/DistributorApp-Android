@@ -5,19 +5,19 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import mk.ukim.finki.my_distributor.databinding.ItemDriverDeliveryBinding
-import mk.ukim.finki.my_distributor.domain.dto.DeliveryDto
+import mk.ukim.finki.my_distributor.domain.dto.DeliverySimpleDto
 
 class DriverDeliveriesAdapter(
-    private var deliveries: List<DeliveryDto>,
-    private val onDeliveryClicked: (DeliveryDto) -> Unit
+    private var deliveries: List<DeliverySimpleDto>,
+    private val onDeliveryClicked: (DeliverySimpleDto) -> Unit
 ) : RecyclerView.Adapter<DriverDeliveriesAdapter.DeliveryViewHolder>() {
 
     inner class DeliveryViewHolder(private val binding: ItemDriverDeliveryBinding) :
         RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("SetTextI18n")
-        fun bind(delivery: DeliveryDto) {
-            binding.deliveryDateTextView.text = "Delivery Date: ${delivery.delDate}"
-            binding.statusTextView.text = "Status: ${delivery.delStatus}"
+        fun bind(delivery: DeliverySimpleDto) {
+            binding.deliveryDateTextView.text = "Delivery Date: ${delivery.deliveryDate}"
+            binding.statusTextView.text = "Status: ${delivery.deliveryStatusName}"
             binding.routeInfoTextView.text = "Route estimate"
             binding.root.setOnClickListener {
                 onDeliveryClicked(delivery)
@@ -42,7 +42,8 @@ class DriverDeliveriesAdapter(
         return deliveries.size
     }
 
-    fun updateData(newDelivereis: List<DeliveryDto>){
+    @SuppressLint("NotifyDataSetChanged")
+    fun updateData(newDelivereis: List<DeliverySimpleDto>) {
         deliveries = newDelivereis
         notifyDataSetChanged()
     }

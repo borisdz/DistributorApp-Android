@@ -7,45 +7,71 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import mk.ukim.finki.my_distributor.data.repository.DeliveryRepository
-import mk.ukim.finki.my_distributor.domain.dto.DeliveryWithOrdersDto
+import mk.ukim.finki.my_distributor.domain.dto.OrderDeliveryDto
 
 class StartDeliveryViewModel(
-    private val repository: DeliveryRepository
+    private val repo: DeliveryRepository
 ) : ViewModel() {
 
-    private val _deliveryWithOrders = MutableLiveData<DeliveryWithOrdersDto?>()
-    val deliveryWithOrders: LiveData<DeliveryWithOrdersDto?> get() = _deliveryWithOrders
+    // Backing list of stops/orders
+    private val _orders = MutableLiveData<List<OrderDeliveryDto>>(emptyList())
+    val orders: LiveData<List<OrderDeliveryDto>> = _orders
 
-    private val _startKm = MutableLiveData<Int>()
-    val startKm: LiveData<Int> get() = _startKm
+    // Any errors
+    private val _error = MutableLiveData<String>()
+    val error: LiveData<String> = _error
 
-    private val _firstOrderLocation = MutableLiveData<Location?>()
-    val firstOrderLocation: LiveData<Location?> get() = _firstOrderLocation
+    // The current next-stop Location
+    private val _currentStopLocation = MutableLiveData<Location?>()
+    val currentStopLocation: LiveData<Location?> = _currentStopLocation
 
-    fun loadDelivery(deliveryId: Long){
-        viewModelScope.launch {
-            repository.getDeliveryWithOrders(deliveryId).onSuccess { dto ->
-                _deliveryWithOrders.value = dto
-
-                if(dto.orders.isNotEmpty()){
-                    val firstOrder = dto.orders.first()
-                }
-            }.onFailure { ex ->
-                //
+    /** Loads the delivery and its orders, then sets up the first stop’s location. */
+    fun loadDeliveryWithOrders(id: Long) = viewModelScope.launch {
+        repo.getDeliveryWithOrders(id)
+            .onSuccess { dto ->
+                _orders.value = dto.orders
+                updateCurrentLocation()
             }
+            .onFailure { ex ->
+                _error.value = ex.message
+            }
+    }
+
+    /** Reorders the stops list, then refreshes the first-stop location. */
+    fun reorderOrders(from: Int, to: Int) {
+        val list = _orders.value?.toMutableList() ?: return
+        val item = list.removeAt(from)
+        list.add(to, item)
+        _orders.value = list
+        updateCurrentLocation()
+    }
+
+    /** Call this when the driver returns from navigating to the current stop. */
+    fun markCurrentStopDone() {
+        val list = _orders.value?.toMutableList() ?: return
+        if (list.isNotEmpty()) {
+            list.removeAt(0)
+            _orders.value = list
+            updateCurrentLocation()
         }
     }
 
-    fun startDelivery(startKm: Int){
-        _startKm.value  = startKm
+    /** Records the starting kilometers — you can expand this to POST to your API. */
+    fun startDelivery(km: Int) {
+        // TODO: Save km in local state or send to backend
     }
 
-    fun reorderOrders(fromPosition: Int, toPosition: Int){
-        _deliveryWithOrders.value?.let { dto ->
-            val currentOrders = dto.orders.toMutableList()
-            val order = currentOrders.removeAt(fromPosition)
-            currentOrders.add(toPosition,order)
-            _deliveryWithOrders.value = dto.copy(orders = currentOrders)
+    /** Internal: gets the first order’s lat/lng and posts a Location, or null if none. */
+    private fun updateCurrentLocation() {
+        val first = _orders.value?.firstOrNull()
+        if (first != null) {
+            val loc = Location("app").apply {
+                latitude = first.latitude.toDouble()
+                longitude = first.longitude.toDouble()
+            }
+            _currentStopLocation.value = loc
+        } else {
+            _currentStopLocation.value = null
         }
     }
 }

@@ -5,11 +5,11 @@
         android:icon="@drawable/ic_dashboard"
         android:title="@string/dashboard" />
     <item
-        android:id="@+id/startDeliveryFragment"
+        android:id="@+id/pastDeliveriesFragment"
         android:icon="@drawable/baseline_directions_car_24"
-        android:title="@string/start_a_delivery"/>
+        android:title="@string/past_deliveries"/>
     <item
-        android:id="@+id/profileFragment"
+        android:id="@+id/driverProfileFragment"
         android:icon="@drawable/ic_profile"
         android:title="@string/profile" />
 </menu>

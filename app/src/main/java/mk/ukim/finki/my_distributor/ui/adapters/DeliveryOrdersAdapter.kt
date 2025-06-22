@@ -7,25 +7,24 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import mk.ukim.finki.my_distributor.databinding.ItemOrderDetailBinding
-import mk.ukim.finki.my_distributor.domain.dto.ArticleDto
-import mk.ukim.finki.my_distributor.domain.dto.OrderDto
+import mk.ukim.finki.my_distributor.domain.dto.OrderDeliveryDto
 
-object OrderDtoDiffCallback : DiffUtil.ItemCallback<OrderDto>() {
-    override fun areItemsTheSame(oldItem: OrderDto, newItem: OrderDto): Boolean {
+object OrderDtoDiffCallback : DiffUtil.ItemCallback<OrderDeliveryDto>() {
+    override fun areItemsTheSame(oldItem: OrderDeliveryDto, newItem: OrderDeliveryDto): Boolean {
         return oldItem.id == newItem.id
     }
 
-    override fun areContentsTheSame(oldItem: OrderDto, newItem: OrderDto): Boolean {
+    override fun areContentsTheSame(oldItem: OrderDeliveryDto, newItem: OrderDeliveryDto): Boolean {
         return oldItem == newItem
     }
 }
 
-class DeliveryOrdersAdapter : ListAdapter<OrderDto, DeliveryOrdersAdapter.OrderViewHolder>(OrderDtoDiffCallback) {
+class DeliveryOrdersAdapter : ListAdapter<OrderDeliveryDto, DeliveryOrdersAdapter.OrderViewHolder>(OrderDtoDiffCallback) {
 
     inner class OrderViewHolder(private val binding: ItemOrderDetailBinding) :
         RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("SetTextI18n")
-        fun bind(order: OrderDto) {
+        fun bind(order: OrderDeliveryDto) {
             binding.articleNameTextView.text = "Order #${order.id}"
             binding.articleQuantityTextView.text = "Qty: [N/A]"
             binding.unitPriceTextView.text = "Unit: $${order.ordSum}"

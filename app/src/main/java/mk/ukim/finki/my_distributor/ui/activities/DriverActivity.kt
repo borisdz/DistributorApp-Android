@@ -21,7 +21,6 @@ class DriverActivity : AppCompatActivity() {
 
         binding = ActivityDriverBinding.inflate(layoutInflater)
 
-
         setContentView(binding.root)
 
         val navHostFragment = supportFragmentManager

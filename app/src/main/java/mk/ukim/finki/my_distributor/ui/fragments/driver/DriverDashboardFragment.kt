@@ -1,15 +1,14 @@
 package mk.ukim.finki.my_distributor.ui.fragments.driver
 
-import androidx.fragment.app.viewModels
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import mk.ukim.finki.my_distributor.R
 import mk.ukim.finki.my_distributor.data.api.RetrofitClient
 import mk.ukim.finki.my_distributor.data.local.UserPreferences
 import mk.ukim.finki.my_distributor.data.repository.DeliveryRepository
@@ -25,7 +24,9 @@ class DriverDashboardFragment : Fragment() {
 
     private val deliveryRepository: DeliveryRepository by lazy {
         DeliveryRepository(
-            RetrofitClient.getDeliveryApiService(UserPreferences.getInstance(requireContext()))
+            RetrofitClient.getDeliveryApiService(
+                UserPreferences.getInstance(requireContext())
+            )
         )
     }
 
@@ -49,13 +50,20 @@ class DriverDashboardFragment : Fragment() {
 
         deliveriesAdapter = DriverDeliveriesAdapter(emptyList()) { delivery ->
             val action = DriverDashboardFragmentDirections
-                .actionDriverDashboardFragmentToDeliveryDetailFragment(delivery.id)
+                .actionDriverDashboardFragmentToDeliveryDetailFragment(delivery.deliveryId)
             findNavController().navigate(action)
         }
         binding.deliveriesRecyclerView.adapter = deliveriesAdapter
 
-        driverDashboardViewModel.deliveries.observe(viewLifecycleOwner) { deliveries ->
-            deliveriesAdapter.updateData(deliveries)
+        driverDashboardViewModel.deliveries.observe(viewLifecycleOwner) { list ->
+            if(list.isEmpty()){
+                binding.emptyTextView.visibility=View.VISIBLE
+                binding.deliveriesRecyclerView.visibility = View.GONE
+            }else {
+                binding.emptyTextView.visibility = View.GONE
+                binding.deliveriesRecyclerView.visibility = View.VISIBLE
+                deliveriesAdapter.updateData(list)
+            }
         }
 
         driverDashboardViewModel.error.observe(viewLifecycleOwner) { errorMsg ->

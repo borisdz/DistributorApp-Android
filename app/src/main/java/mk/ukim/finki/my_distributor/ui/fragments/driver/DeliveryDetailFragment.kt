@@ -1,4 +1,4 @@
-package mk.ukim.finki.my_distributor.ui.fragments.customer
+package mk.ukim.finki.my_distributor.ui.fragments.driver
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -16,17 +16,18 @@ import mk.ukim.finki.my_distributor.data.local.UserPreferences
 import mk.ukim.finki.my_distributor.data.repository.DeliveryRepository
 import mk.ukim.finki.my_distributor.databinding.FragmentDeliveryDetailBinding
 import mk.ukim.finki.my_distributor.ui.adapters.OrderInDeliveryAdapter
-import mk.ukim.finki.my_distributor.ui.fragments.driver.DeliveryDetailFragmentDirections
+import mk.ukim.finki.my_distributor.ui.fragments.customer.DeliveryDetailFragmentArgs
 import mk.ukim.finki.my_distributor.ui.viewmodel.DeliveryDetailViewModel
 import mk.ukim.finki.my_distributor.ui.viewmodel.DeliveryDetailViewModelFactory
 
 class DeliveryDetailFragment : Fragment() {
+
     private var _binding: FragmentDeliveryDetailBinding? = null
     private val binding get() = _binding!!
 
     private val args: DeliveryDetailFragmentArgs by navArgs()
 
-    private val repo by lazy {
+    private val deliveryRepository by lazy {
         DeliveryRepository(
             RetrofitClient.getDeliveryApiService(
                 UserPreferences.getInstance(requireContext())
@@ -35,13 +36,19 @@ class DeliveryDetailFragment : Fragment() {
     }
 
     private val viewModel: DeliveryDetailViewModel by viewModels {
-        DeliveryDetailViewModelFactory(repo)
+        DeliveryDetailViewModelFactory(deliveryRepository)
     }
 
     private lateinit var adapter: OrderInDeliveryAdapter
 
-    override fun onCreateView(i: LayoutInflater, c: ViewGroup?, s: Bundle?) =
-        FragmentDeliveryDetailBinding.inflate(i, c, false).also { _binding = it }.root
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding = FragmentDeliveryDetailBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -53,7 +60,7 @@ class DeliveryDetailFragment : Fragment() {
 
         viewModel.detail.observe(viewLifecycleOwner) { dto ->
             binding.deliveryDateTv.text = "Date: ${dto?.delivery?.delDate.toString()}"
-            binding.deliveryStatusTv.text = "Status: ${dto?.delivery?.delStatus}"
+            binding.deliveryDateTv.text = "Status: ${dto?.delivery?.delStatus}"
             adapter.submitList(dto?.orders)
         }
         viewModel.error.observe(viewLifecycleOwner) {

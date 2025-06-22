@@ -20,6 +20,8 @@ import java.time.LocalDateTime
 
 object RetrofitClient {
     private const val BASE_URL = "https://10.0.2.2:8443/"
+    //    private const val BASE_URL = "https://192.168.31.100:8443/"
+    //    private const val BASE_URL = "https://192.168.236.211:8443/"
 
     @SuppressLint("NewApi")
     val customGson: Gson = GsonBuilder()

@@ -20,7 +20,9 @@ class DeliveriesAdapter(
         fun bind(delivery: DeliveryDto) {
             binding.deliveryTitle.text = delivery.delDate.toString()
             binding.deliverySummary.text = "Driver: " + delivery.driverName
-            binding.root.setOnClickListener { onItemClicked(delivery) }
+            binding.root.setOnClickListener {
+                onItemClicked(delivery)
+            }
         }
     }
 
