@@ -57,4 +57,5 @@
     <string name="enter_starting_km">Enter starting KM</string>
     <string name="start_delivery">Start Delivery</string>
     <string name="past_deliveries">Past Deliveries</string>
+    <string name="create_delivery">Create Delivery</string>
 </resources>

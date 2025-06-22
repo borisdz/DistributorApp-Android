@@ -7,6 +7,7 @@ import mk.ukim.finki.my_distributor.data.api.service.ArticleApiService
 import mk.ukim.finki.my_distributor.data.api.service.AuthApiService
 import mk.ukim.finki.my_distributor.data.api.service.DashboardApiService
 import mk.ukim.finki.my_distributor.data.api.service.DeliveryApiService
+import mk.ukim.finki.my_distributor.data.api.service.ManagerApiService
 import mk.ukim.finki.my_distributor.data.api.service.OrderApiService
 import mk.ukim.finki.my_distributor.data.api.service.UserApiService
 import mk.ukim.finki.my_distributor.data.local.UserPreferences
@@ -71,5 +72,9 @@ object RetrofitClient {
 
     fun getDeliveryApiService(userPreferences: UserPreferences): DeliveryApiService {
         return getRetrofit(userPreferences).create(DeliveryApiService::class.java)
+    }
+
+    fun getManagerApiService(userPreferences: UserPreferences): ManagerApiService {
+        return getRetrofit(userPreferences).create(ManagerApiService::class.java)
     }
 }

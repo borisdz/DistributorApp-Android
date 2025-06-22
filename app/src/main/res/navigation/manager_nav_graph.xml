@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/manager_nav_graph"
+    app:startDestination="@id/managerDashboardFragment">
+
+    <fragment
+        android:id="@+id/managerDashboardFragment"
+        android:name="mk.ukim.finki.my_distributor.ui.fragments.manager.ManagerDashboardFragment"
+        android:label="Dashboard">
+    </fragment>
+
+    <fragment
+        android:id="@+id/createDeliveryFragment"
+        android:name="mk.ukim.finki.my_distributor.ui.fragments.manager.CreateDeliveryFragment"
+        android:label="Create Delivery" >
+    </fragment>
+
+    <fragment
+        android:id="@+id/managerProfileFragment"
+        android:name="mk.ukim.finki.my_distributor.ui.fragments.manager.ManagerProfileFragment"
+        android:label="Profile" >
+    </fragment>
+</navigation>

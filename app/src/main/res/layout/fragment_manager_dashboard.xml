@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- New Orders Header -->
+    <TextView
+        android:id="@+id/newOrdersLabel"
+        style="@style/TextAppearance.MaterialComponents.Headline6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Orders" />
+
+    <!-- RecyclerView for New Orders -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/newOrdersRv"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:overScrollMode="never"
+        android:clipToPadding="false" />
+
+    <!-- Spacer -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="16dp" />
+
+    <!-- Pending Deliveries Header -->
+    <TextView
+        android:id="@+id/pendingDelLabel"
+        style="@style/TextAppearance.MaterialComponents.Headline6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pending Deliveries" />
+
+    <!-- RecyclerView for Pending Deliveries -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/pendingDelRv"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:overScrollMode="never"
+        android:clipToPadding="false" />
+
+</LinearLayout>
