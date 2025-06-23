@@ -1,9 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:fitsSystemWindows="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragments.manager.ManagerProfileFragment"
-    tools:ignore="ExtraText">
+    android:padding="16dp">
 
-</FrameLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal">
+
+        <!-- Profile Image -->
+        <ImageView
+            android:id="@+id/profileImageView"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/ic_profile"
+            android:contentDescription="@string/profile_image"
+            android:layout_marginTop="16dp"/>
+
+        <!-- Name & Email -->
+        <TextView
+            android:id="@+id/nameTextView"
+            style="@style/TextAppearance.MaterialComponents.Headline6"
+            android:layout_marginTop="12dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/emailTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <!-- Buttons -->
+        <Button
+            android:id="@+id/pendingDeliveriesButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/pending_deliveries"
+            android:layout_marginTop="24dp"/>
+
+        <Button
+            android:id="@+id/newOrdersButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/new_orders"
+            android:layout_marginTop="8dp"/>
+
+        <Button
+            android:id="@+id/warehouseStatsButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/warehouse_statistics"
+            android:layout_marginTop="8dp"/>
+
+        <Button
+            android:id="@+id/logoutButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/logout"
+            android:layout_marginTop="24dp"/>
+
+    </LinearLayout>
+</ScrollView>

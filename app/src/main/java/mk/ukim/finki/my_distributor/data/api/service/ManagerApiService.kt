@@ -3,7 +3,7 @@ package mk.ukim.finki.my_distributor.data.api.service
 import mk.ukim.finki.my_distributor.domain.dto.CreateDeliveryRequestDto
 import mk.ukim.finki.my_distributor.domain.dto.CreateDeliveryResponseDto
 import mk.ukim.finki.my_distributor.domain.dto.ManagerDashboardDto
-import mk.ukim.finki.my_distributor.domain.dto.OrderDto
+import mk.ukim.finki.my_distributor.domain.dto.OrderSimpleDto
 import mk.ukim.finki.my_distributor.domain.dto.VehicleDto
 import retrofit2.Response
 import retrofit2.http.Body
@@ -15,12 +15,12 @@ interface ManagerApiService {
     suspend fun getDashboard(): Response<ManagerDashboardDto>
 
     @GET("api/manager/orders/unassigned")
-    suspend fun getUnassignedOrders(): Response<List<OrderDto>>
+    suspend fun getUnassignedOrders(): Response<List<OrderSimpleDto>>
 
     @GET("api/manager/vehicles")
     suspend fun getVehicles(): Response<List<VehicleDto>>
 
-    @POST("api/manager/deliveries")
+    @POST("api/manager/create-delivery")
     suspend fun createDelivery(
         @Body body: CreateDeliveryRequestDto
     ): Response<CreateDeliveryResponseDto>

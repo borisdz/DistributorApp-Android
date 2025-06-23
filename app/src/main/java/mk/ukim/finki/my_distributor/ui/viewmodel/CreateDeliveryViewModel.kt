@@ -8,7 +8,7 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import mk.ukim.finki.my_distributor.data.repository.ManagerRepository
 import mk.ukim.finki.my_distributor.domain.dto.CreateDeliveryResponseDto
-import mk.ukim.finki.my_distributor.domain.dto.OrderDto
+import mk.ukim.finki.my_distributor.domain.dto.OrderSimpleDto
 import mk.ukim.finki.my_distributor.domain.dto.VehicleDto
 
 class CreateDeliveryViewModelFactory(
@@ -28,7 +28,7 @@ class CreateDeliveryViewModel(
     private val repo: ManagerRepository
 ) : ViewModel() {
 
-    val unassignedOrders = MutableLiveData<List<OrderDto>>()
+    val unassignedOrders = MutableLiveData<List<OrderSimpleDto>>()
     val vehicles         = MutableLiveData<List<VehicleDto>>()
     val selectedOrders   = mutableSetOf<Long>()
     val selectedVehicle  = MutableLiveData<VehicleDto?>()
@@ -51,9 +51,9 @@ class CreateDeliveryViewModel(
         }
     }
 
-    fun toggleOrderSelection(orderId: Long) {
-        if (!selectedOrders.remove(orderId))
-            selectedOrders.add(orderId)
+    fun toggleOrderSelection(order: OrderSimpleDto) {
+        if (!selectedOrders.remove(order.id))
+            selectedOrders.add(order.id)
         unassignedOrders.value = unassignedOrders.value
     }
 

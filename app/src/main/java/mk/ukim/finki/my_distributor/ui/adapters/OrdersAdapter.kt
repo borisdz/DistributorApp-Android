@@ -6,18 +6,18 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import mk.ukim.finki.my_distributor.databinding.ItemOrderBinding
-import mk.ukim.finki.my_distributor.domain.dto.OrderDto
+import mk.ukim.finki.my_distributor.domain.dto.OrderSimpleDto
 import mk.ukim.finki.my_distributor.util.callbacks.OrderDiffCallback
 
 class OrdersAdapter(
-    private var orders: List<OrderDto>,
-    private val onItemClicked: (OrderDto) -> Unit
+    private var orders: List<OrderSimpleDto>,
+    private val onItemClicked: (OrderSimpleDto) -> Unit
 ) : RecyclerView.Adapter<OrdersAdapter.OrderViewHolder>() {
 
     inner class OrderViewHolder(private val binding: ItemOrderBinding) :
         RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("SetTextI18n")
-        fun bind(order: OrderDto) {
+        fun bind(order: OrderSimpleDto) {
             binding.orderTitle.text = order.ordDate.toString()
             binding.orderSummary.text = "$" + order.ordSum.toString()
             binding.root.setOnClickListener { onItemClicked(order) }
@@ -41,7 +41,7 @@ class OrdersAdapter(
         return orders.size
     }
 
-    fun updateData(newOrders: List<OrderDto>) {
+    fun updateData(newOrders: List<OrderSimpleDto>) {
         val diffCallback = OrderDiffCallback(this.orders, newOrders)
         val diffResult = DiffUtil.calculateDiff(diffCallback)
         this.orders = newOrders

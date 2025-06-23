@@ -58,4 +58,8 @@
     <string name="start_delivery">Start Delivery</string>
     <string name="past_deliveries">Past Deliveries</string>
     <string name="create_delivery">Create Delivery</string>
+    <string name="warehouse_statistics">Warehouse Statistics</string>
+    <string name="new_orders">New Orders</string>
+    <string name="pending_deliveries">Pending Deliveries</string>
+    <string name="profile_image">Profile Image</string>
 </resources>

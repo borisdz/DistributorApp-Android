@@ -1,11 +1,11 @@
 package mk.ukim.finki.my_distributor.util.callbacks
 
 import androidx.recyclerview.widget.DiffUtil
-import mk.ukim.finki.my_distributor.domain.dto.OrderDto
+import mk.ukim.finki.my_distributor.domain.dto.OrderSimpleDto
 
 class OrderDiffCallback(
-    private val oldList: List<OrderDto>,
-    private val newList: List<OrderDto>
+    private val oldList: List<OrderSimpleDto>,
+    private val newList: List<OrderSimpleDto>
 ) : DiffUtil.Callback() {
     override fun getOldListSize(): Int {
         return oldList.size

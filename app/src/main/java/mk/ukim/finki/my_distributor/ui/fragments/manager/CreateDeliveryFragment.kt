@@ -1,7 +1,6 @@
 package mk.ukim.finki.my_distributor.ui.fragments.manager
 
 import android.app.DatePickerDialog
-import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
-import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,7 +19,6 @@ import mk.ukim.finki.my_distributor.databinding.FragmentCreateDeliveryBinding
 import mk.ukim.finki.my_distributor.ui.adapters.MultiSelectOrdersAdapter
 import mk.ukim.finki.my_distributor.ui.viewmodel.CreateDeliveryViewModel
 import mk.ukim.finki.my_distributor.ui.viewmodel.CreateDeliveryViewModelFactory
-import java.time.LocalDate
 
 class CreateDeliveryFragment : Fragment() {
 
@@ -51,7 +48,7 @@ class CreateDeliveryFragment : Fragment() {
         return binding.root
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -100,7 +97,7 @@ class CreateDeliveryFragment : Fragment() {
         }
 
         binding.datePickerBtn.setOnClickListener {
-            val today = LocalDate.now()
+            val calendar = java.util.Calendar.getInstance()
             DatePickerDialog(
                 requireContext(),
                 { _, year, month, day ->
@@ -109,9 +106,9 @@ class CreateDeliveryFragment : Fragment() {
                     viewModel.deliveryDate.value = isoDate
                     binding.datePickerBtn.text = isoDate
                 },
-                today.year,
-                today.monthValue - 1,
-                today.dayOfMonth
+                calendar.get(java.util.Calendar.YEAR),
+                calendar.get(java.util.Calendar.MONTH),
+                calendar.get(java.util.Calendar.DAY_OF_MONTH)
             ).show()
         }
 

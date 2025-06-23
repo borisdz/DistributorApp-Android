@@ -8,12 +8,11 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import mk.ukim.finki.my_distributor.R
 import mk.ukim.finki.my_distributor.data.api.RetrofitClient
 import mk.ukim.finki.my_distributor.data.local.UserPreferences
 import mk.ukim.finki.my_distributor.data.repository.ManagerRepository
 import mk.ukim.finki.my_distributor.databinding.FragmentManagerDashboardBinding
-import mk.ukim.finki.my_distributor.ui.adapters.DeliveriesAdapter
+import mk.ukim.finki.my_distributor.ui.adapters.ManagerDeliveriesAdapter
 import mk.ukim.finki.my_distributor.ui.adapters.OrdersAdapter
 import mk.ukim.finki.my_distributor.ui.viewmodel.ManagerDashboardViewModel
 import mk.ukim.finki.my_distributor.ui.viewmodel.ManagerDashboardViewModelFactory
@@ -33,12 +32,12 @@ class ManagerDashboardFragment : Fragment() {
 
     // ViewModel via factory
     private val viewModel: ManagerDashboardViewModel by viewModels {
-        ManagerDashboardViewModelFactory(repository, prefs)
+        ManagerDashboardViewModelFactory(repository)
     }
 
     // Adapters for the two lists
     private lateinit var ordersAdapter: OrdersAdapter
-    private lateinit var deliveriesAdapter: DeliveriesAdapter
+    private lateinit var deliveriesAdapter: ManagerDeliveriesAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -53,14 +52,14 @@ class ManagerDashboardFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // 1) New Orders RecyclerView
-        ordersAdapter = OrdersAdapter { /* onOrderClick: implement if needed */ }
+        ordersAdapter = OrdersAdapter(emptyList()) { /* onOrderClick: implement if needed */ }
         binding.newOrdersRv.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = ordersAdapter
         }
 
         // 2) Pending Deliveries RecyclerView
-        deliveriesAdapter = DeliveriesAdapter { /* onDeliveryClick: implement if needed */ }
+        deliveriesAdapter = ManagerDeliveriesAdapter(emptyList()) { /* onDeliveryClick: implement if needed */ }
         binding.pendingDelRv.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = deliveriesAdapter
